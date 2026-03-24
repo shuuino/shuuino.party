@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>shuuino.party — blog</title>
+    <link>https://shuuino.party/</link>
+    <description>links, articles, and videos i find interesting</description>
+    <language>en</language>
+    <lastBuildDate>Thu, 20 Mar 2026 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://shuuino.party/feed.xml" rel="self" type="application/rss+xml"/>
+
+    <item>
+      <title>▶ Video — youtube.com (mar 20, 2026)</title>
+      <link>https://www.youtube.com/watch?v=xFKSKjyBVDU</link>
+      <guid isPermaLink="true">https://www.youtube.com/watch?v=xFKSKjyBVDU</guid>
+      <pubDate>Thu, 20 Mar 2026 00:00:00 +0000</pubDate>
+      <description>A video shared on my blog. Click through to watch on YouTube.</description>
+    </item>
+
+    <item>
+      <title>Meta Lobbying and Other Findings</title>
+      <link>https://github.com/upper-up/meta-lobbying-and-other-findings</link>
+      <guid isPermaLink="true">https://github.com/upper-up/meta-lobbying-and-other-findings</guid>
+      <pubDate>Fri, 13 Mar 2026 00:00:00 +0000</pubDate>
+      <description>A documented collection of Meta's lobbying activity and policy influence — the kind of thing that doesn't make headlines but shapes the rules everyone has to live by.</description>
+    </item>
+
+    <item>
+      <title>Historic Chat Control Vote: MEPs Block Mass Scanning of Private Chats</title>
+      <link>https://www.patrick-breyer.de/en/historic-chat-control-vote-in-the-eu-parliament-meps-vote-to-end-untargeted-mass-scanning-of-private-chats/</link>
+      <guid isPermaLink="true">https://www.patrick-breyer.de/en/historic-chat-control-vote-in-the-eu-parliament-meps-vote-to-end-untargeted-mass-scanning-of-private-chats/</guid>
+      <pubDate>Tue, 11 Mar 2026 00:00:00 +0000</pubDate>
+      <description>The EU Parliament voted to reject untargeted surveillance of all private messages. A significant win for encrypted communication, though the fight is far from over.</description>
+    </item>
+
+    <item>
+      <title>California Law Requires Age Verification on All Operating Systems — Including Linux</title>
+      <link>https://www.pcgamer.com/software/operating-systems/a-new-california-law-says-all-operating-systems-including-linux-need-to-have-some-form-of-age-verification-at-account-setup/</link>
+      <guid isPermaLink="true">https://www.pcgamer.com/software/operating-systems/a-new-california-law-says-all-operating-systems-including-linux-need-to-have-some-form-of-age-verification-at-account-setup/</guid>
+      <pubDate>Fri, 27 Feb 2026 00:00:00 +0000</pubDate>
+      <description>A new California law mandates some form of age verification at account setup for all operating systems. The implications for open-source software and user privacy are significant.</description>
+    </item>
+
+    <item>
+      <title>Persona</title>
+      <link>https://vmfunc.re/blog/persona</link>
+      <guid isPermaLink="true">https://vmfunc.re/blog/persona</guid>
+      <pubDate>Mon, 16 Feb 2026 00:00:00 +0000</pubDate>
+      <description>A thoughtful post on identity, online personas, and the gap between who we present ourselves to be and who we actually are.</description>
+    </item>
+
+    <item>
+      <title>How Age Verification Systems Actually Work (and Fail)</title>
+      <link>https://age-verifier.kibty.town/</link>
+      <guid isPermaLink="true">https://age-verifier.kibty.town/</guid>
+      <pubDate>Thu, 12 Feb 2026 00:00:00 +0000</pubDate>
+      <description>A technical breakdown of what "age verification" really means in practice — and why every proposed implementation either doesn't work or creates a surveillance infrastructure far worse than the problem it claims to solve.</description>
+    </item>
+
+    <item>
+      <title>Hacking 35 Million+ Snaps — Follow-up Findings</title>
+      <link>https://gist.github.com/hackermondev/5e2cdc32849405fff6b46957747a2d28</link>
+      <guid isPermaLink="true">https://gist.github.com/hackermondev/5e2cdc32849405fff6b46957747a2d28</guid>
+      <pubDate>Mon, 15 Dec 2025 00:00:00 +0000</pubDate>
+      <description>The follow-up to the original bug report: further research uncovering the scale and implications of the Snapchat vulnerability.</description>
+    </item>
+
+    <item>
+      <title>EU Develops Independent Payment System to Reduce Reliance on Global Providers</title>
+      <link>https://mobileidworld.com/eu-develops-independent-payment-system-to-reduce-reliance-on-global-providers/</link>
+      <guid isPermaLink="true">https://mobileidworld.com/eu-develops-independent-payment-system-to-reduce-reliance-on-global-providers/</guid>
+      <pubDate>Wed, 23 Apr 2025 00:00:00 +0000</pubDate>
+      <description>The EU is building its own payment infrastructure to reduce dependence on US-based processors — part of a broader push for digital sovereignty.</description>
+    </item>
+
+    <item>
+      <title>I'm 15 and I Think I Found a Bug Affecting 10 Million+ Apps</title>
+      <link>https://gist.github.com/hackermondev/45a3cdfa52246f1d1201c1e8cdef6117</link>
+      <guid isPermaLink="true">https://gist.github.com/hackermondev/45a3cdfa52246f1d1201c1e8cdef6117</guid>
+      <pubDate>Tue, 21 Jan 2025 00:00:00 +0000</pubDate>
+      <description>A teenager discovers a significant security flaw in a widely-used service through methodical, independent research — a good reminder that age isn't a barrier to serious security work.</description>
+    </item>
+
+  </channel>
+</rss>

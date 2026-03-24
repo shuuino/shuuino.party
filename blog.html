@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+   <link rel="icon" type="image/x-icon" href="icon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>blog · shuuino.party</title>
+
+  <!-- RSS feed autodiscovery -->
+  <link rel="alternate" type="application/rss+xml" title="shuuino.party — blog" href="./feed.xml" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Gochi+Hand&family=Lora:ital,wght@0,400;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html,body{overflow-x:hidden;max-width:100%}
+
+    :root{
+      --bg:#0d0118; --ink:#ede6ff; --muted:#9b8ab8; --faint:#3d2860;
+      --glow:#b06bff; --glow2:#7c3aed; --accent:#d97bff; --accent2:#7ee8fa;
+      --card-bg:rgba(18,4,32,.92); --card-bdr:rgba(150,80,255,.25);
+      --radius:7px;
+    }
+
+    html{scroll-behavior:smooth}
+
+    body{
+      background:var(--bg); color:var(--ink);
+      font-family:'Lora',Georgia,serif; font-size:15px; line-height:1.7;
+      min-height:100vh;
+    }
+
+    #bg-layer{
+      position:fixed; inset:0; z-index:0; pointer-events:none;
+      background-color:var(--bg);
+      background-image:
+        radial-gradient(ellipse 80vw 60vh at 20% 10%, rgba(112,40,200,.22) 0%,transparent 65%),
+        radial-gradient(ellipse 60vw 50vh at 80% 70%, rgba(200,60,255,.14) 0%,transparent 60%),
+        repeating-linear-gradient(0deg, transparent,transparent 39px,rgba(150,80,255,.03) 39px,rgba(150,80,255,.03) 40px),
+        repeating-linear-gradient(90deg,transparent,transparent 39px,rgba(150,80,255,.03) 39px,rgba(150,80,255,.03) 40px);
+    }
+
+    ::selection{background:rgba(176,107,255,.35)}
+    a{color:var(--accent2);text-decoration:underline dotted;transition:color .15s}
+    a:hover{color:var(--glow)}
+    ::-webkit-scrollbar{width:6px}
+    ::-webkit-scrollbar-track{background:var(--bg)}
+    ::-webkit-scrollbar-thumb{background:var(--glow2);border-radius:3px}
+
+    /* ── page header ── */
+    .page-header{
+      position:relative; z-index:2;
+      max-width:760px; margin:0 auto;
+      padding:3rem 1.5rem 2rem;
+      border-bottom:1px solid var(--card-bdr);
+    }
+    .back-link{
+      display:inline-flex;align-items:center;gap:.4rem;
+      font-family:'Space Mono',monospace;font-size:.62rem;letter-spacing:.08em;
+      text-transform:uppercase;color:var(--muted);text-decoration:none;
+      margin-bottom:1.2rem;transition:color .15s;
+    }
+    .back-link:hover{color:var(--accent)}
+    .back-link::before{content:'←';font-size:.75rem}
+    .page-title{
+      font-family:'Gochi Hand',cursive;
+      font-size:clamp(2.2rem,6vw,3.5rem);
+      color:var(--ink);line-height:1;
+      text-shadow:0 0 18px rgba(190,110,255,.4);
+      margin-bottom:.5rem;
+    }
+    .page-title span{color:var(--accent)}
+    .page-sub{
+      font-size:.82rem;font-style:italic;color:var(--muted);
+    }
+    .rss-link{
+      display:inline-flex;align-items:center;gap:.35rem;
+      margin-top:.9rem;
+      font-family:'Space Mono',monospace;font-size:.6rem;letter-spacing:.08em;
+      text-transform:uppercase;text-decoration:none;
+      color:#f97316;border:1px solid rgba(249,115,22,.35);
+      padding:.25rem .65rem;border-radius:4px;
+      background:rgba(249,115,22,.07);transition:background .15s,box-shadow .15s;
+    }
+    .rss-link:hover{background:rgba(249,115,22,.15);box-shadow:0 0 12px rgba(249,115,22,.2);color:#f97316}
+    .rss-icon{font-size:.75rem}
+
+    /* ── post list ── */
+    .post-list{
+      position:relative; z-index:2;
+      max-width:760px; margin:0 auto;
+      padding:0 1.5rem 4rem;
+    }
+
+    /* year divider */
+    .year-divider{
+      font-family:'Space Mono',monospace;font-size:.6rem;letter-spacing:.22em;
+      text-transform:uppercase;color:var(--faint);
+      margin:2.5rem 0 .8rem;
+      display:flex;align-items:center;gap:.6rem;
+    }
+    .year-divider::after{
+      content:'';flex:1;height:1px;
+      background:linear-gradient(90deg,rgba(150,80,255,.2),transparent);
+    }
+
+    /* post card */
+    .post-entry{
+      border-bottom:1px solid rgba(150,80,255,.1);
+    }
+    .post-entry:last-child{border-bottom:none}
+
+    .post-link{
+      display:grid;
+      grid-template-columns:5px 1fr;
+      gap:0 1rem;
+      padding:1.3rem 0;
+      text-decoration:none;color:inherit;
+    }
+    .post-stripe{
+      border-radius:3px;
+      align-self:stretch;
+      min-height:100%;
+    }
+    .post-meta-row{
+      display:flex;align-items:center;gap:.45rem;flex-wrap:wrap;
+      margin-bottom:.3rem;
+    }
+    .post-domain{
+      font-family:'Space Mono',monospace;font-size:.55rem;
+      letter-spacing:.06em;color:var(--faint);text-transform:lowercase;
+    }
+    .post-dot{width:3px;height:3px;border-radius:50%;background:var(--faint);opacity:.5}
+    .post-date{font-family:'Space Mono',monospace;font-size:.55rem;color:var(--faint)}
+    .post-type-badge{
+      font-family:'Space Mono',monospace;font-size:.5rem;letter-spacing:.06em;
+      padding:.1rem .35rem;border-radius:3px;text-transform:uppercase;
+    }
+    .badge-video{background:rgba(255,68,68,.15);color:#ff6b6b;border:1px solid rgba(255,68,68,.25)}
+
+    .post-title{
+      font-family:'Gochi Hand',cursive;font-size:1.2rem;line-height:1.25;
+      color:var(--ink);margin-bottom:.3rem;
+      transition:color .15s;
+    }
+    .post-link:hover .post-title{color:var(--accent)}
+
+    .post-excerpt{
+      font-size:.78rem;font-style:italic;color:var(--muted);line-height:1.55;
+      display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;
+      line-clamp:2;overflow:hidden;
+    }
+
+    /* video embed inside post card */
+    .post-video-wrap{
+      position:relative;width:100%;padding-top:56.25%;
+      margin:.55rem 0 .35rem;border-radius:4px;overflow:hidden;background:#000;
+    }
+    .post-iframe{
+      position:absolute;inset:0;width:100%;height:100%;
+      border:none;pointer-events:none;border-radius:4px;
+    }
+
+    .post-read{
+      display:inline-block;margin-top:.4rem;
+      font-family:'Space Mono',monospace;font-size:.57rem;
+      letter-spacing:.08em;text-transform:uppercase;color:var(--accent2);
+      transition:color .15s;
+    }
+    .post-link:hover .post-read{color:var(--glow)}
+
+    /* ── footer ── */
+    .page-footer{
+      position:relative;z-index:2;
+      text-align:center;padding:2rem 1.5rem;
+      border-top:1px solid var(--card-bdr);
+      font-family:'Space Mono',monospace;font-size:.6rem;
+      letter-spacing:.06em;color:var(--faint);
+    }
+    .page-footer a{color:var(--faint);text-decoration:none}
+    .page-footer a:hover{color:var(--muted)}
+
+    @media(max-width:540px){
+      html{font-size:16px}
+      .post-link{gap:0 .7rem}
+    }
+  </style>
+</head>
+<body>
+<div id="bg-layer" aria-hidden="true"></div>
+
+<header class="page-header">
+  <a class="back-link" href="./index.html">home</a>
+  <h1 class="page-title">the <span>blog</span></h1>
+  <p class="page-sub">links, articles, and videos i find interesting — in no particular order of importance.</p>
+  <a class="rss-link" href="./feed.xml">
+    <span class="rss-icon">◉</span> rss feed
+  </a>
+</header>
+
+<main class="post-list">
+
+  <!-- ══ 2026 ══════════════════════════════════════════════════ -->
+  <div class="year-divider">2026</div>
+
+  <!-- mar 20 2026 — YouTube -->
+  <article class="post-entry">
+    <div class="post-link" style="cursor:default;">
+      <span class="post-stripe" style="background:#ff4444"></span>
+      <div class="post-body">
+        <div class="post-meta-row">
+          <span class="post-domain">youtube.com</span>
+          <span class="post-dot"></span>
+          <span class="post-date">mar 20, 2026</span>
+          <span class="post-type-badge badge-video">▶ video</span>
+        </div>
+        <div class="post-title">▶ video</div>
+        <div class="post-video-wrap">
+          <iframe class="post-iframe"
+            src="https://www.youtube.com/embed/xFKSKjyBVDU?autoplay=0&controls=0&modestbranding=1&rel=0"
+            title="YouTube video" frameborder="0" allowfullscreen
+            tabindex="-1" aria-hidden="true"></iframe>
+        </div>
+        <a class="post-read" href="https://www.youtube.com/watch?v=xFKSKjyBVDU" target="_blank" rel="noopener">watch on youtube →</a>
+      </div>
+    </div>
+  </article>
+
+  <!-- mar 13 2026 -->
+  <article class="post-entry">
+    <a class="post-link" href="https://github.com/upper-up/meta-lobbying-and-other-findings" target="_blank" rel="noopener">
+      <span class="post-stripe" style="background:#6e40c9"></span>
+      <div class="post-body">
+        <div class="post-meta-row">
+          <span class="post-domain">github.com</span>
+          <span class="post-dot"></span>
+          <span class="post-date">mar 13, 2026</span>
+        </div>
+        <div class="post-title">Meta Lobbying and Other Findings</div>
+        <p class="post-excerpt">A documented collection of Meta's lobbying activity and policy influence — the kind of thing that doesn't make headlines but shapes the rules everyone has to live by.</p>
+        <span class="post-read">read →</span>
+      </div>
+    </a>
+  </article>
+
+  <!-- mar 11 2026 -->
+  <article class="post-entry">
+    <a class="post-link" href="https://www.patrick-breyer.de/en/historic-chat-control-vote-in-the-eu-parliament-meps-vote-to-end-untargeted-mass-scanning-of-private-chats/" target="_blank" rel="noopener">
+      <span class="post-stripe" style="background:#60a5fa"></span>
+      <div class="post-body">
+        <div class="post-meta-row">
+          <span class="post-domain">patrick-breyer.de</span>
+          <span class="post-dot"></span>
+          <span class="post-date">mar 11, 2026</span>
+        </div>
+        <div class="post-title">Historic Chat Control Vote: MEPs Block Mass Scanning of Private Chats</div>
+        <p class="post-excerpt">The EU Parliament voted to reject untargeted surveillance of all private messages. A significant win for encrypted communication, though the fight is far from over.</p>
+        <span class="post-read">read →</span>
+      </div>
+    </a>
+  </article>
+
+  <!-- feb 27 2026 -->
+  <article class="post-entry">
+    <a class="post-link" href="https://www.pcgamer.com/software/operating-systems/a-new-california-law-says-all-operating-systems-including-linux-need-to-have-some-form-of-age-verification-at-account-setup/" target="_blank" rel="noopener">
+      <span class="post-stripe" style="background:#f97316"></span>
+      <div class="post-body">
+        <div class="post-meta-row">
+          <span class="post-domain">pcgamer.com</span>
+          <span class="post-dot"></span>
+          <span class="post-date">feb 27, 2026</span>
+        </div>
+        <div class="post-title">California Law Requires Age Verification on All Operating Systems — Including Linux</div>
+        <p class="post-excerpt">A new California law mandates some form of age verification at account setup for all operating systems. The implications for open-source software and user privacy are significant.</p>
+        <span class="post-read">read →</span>
+      </div>
+    </a>
+  </article>
+
+  <!-- feb 16 2026 -->
+  <article class="post-entry">
+    <a class="post-link" href="https://vmfunc.re/blog/persona" target="_blank" rel="noopener">
+      <span class="post-stripe" style="background:#e879f9"></span>
+      <div class="post-body">
+        <div class="post-meta-row">
+          <span class="post-domain">vmfunc.re</span>
+          <span class="post-dot"></span>
+          <span class="post-date">feb 16, 2026</span>
+        </div>
+        <div class="post-title">Persona</div>
+        <p class="post-excerpt">A thoughtful post on identity, online personas, and the gap between who we present ourselves to be and who we actually are — especially relevant in an era of algorithmic self-presentation.</p>
+        <span class="post-read">read →</span>
+      </div>
+    </a>
+  </article>
+
+  <!-- feb 12 2026 -->
+  <article class="post-entry">
+    <a class="post-link" href="https://age-verifier.kibty.town/" target="_blank" rel="noopener">
+      <span class="post-stripe" style="background:#a78bfa"></span>
+      <div class="post-body">
+        <div class="post-meta-row">
+          <span class="post-domain">age-verifier.kibty.town</span>
+          <span class="post-dot"></span>
+          <span class="post-date">feb 12, 2026</span>
+        </div>
+        <div class="post-title">How Age Verification Systems Actually Work (and Fail)</div>
+        <p class="post-excerpt">A technical breakdown of what "age verification" really means in practice — and why every proposed implementation either doesn't work or creates a surveillance infrastructure far worse than the problem it claims to solve.</p>
+        <span class="post-read">read →</span>
+      </div>
+    </a>
+  </article>
+
+  <!-- ══ 2025 ══════════════════════════════════════════════════ -->
+  <div class="year-divider">2025</div>
+
+  <!-- dec 15 2025 -->
+  <article class="post-entry">
+    <a class="post-link" href="https://gist.github.com/hackermondev/5e2cdc32849405fff6b46957747a2d28" target="_blank" rel="noopener">
+      <span class="post-stripe" style="background:#3ddc84"></span>
+      <div class="post-body">
+        <div class="post-meta-row">
+          <span class="post-domain">gist.github.com</span>
+          <span class="post-dot"></span>
+          <span class="post-date">dec 15, 2025</span>
+        </div>
+        <div class="post-title">Hacking 35 Million+ Snaps — Follow-up Findings</div>
+        <p class="post-excerpt">The follow-up to the original bug report: further research uncovering the scale and implications of the Snapchat vulnerability. Methodical, independently verified, and published responsibly.</p>
+        <span class="post-read">read →</span>
+      </div>
+    </a>
+  </article>
+
+  <!-- apr 23 2025 -->
+  <article class="post-entry">
+    <a class="post-link" href="https://mobileidworld.com/eu-develops-independent-payment-system-to-reduce-reliance-on-global-providers/" target="_blank" rel="noopener">
+      <span class="post-stripe" style="background:#7ee8fa"></span>
+      <div class="post-body">
+        <div class="post-meta-row">
+          <span class="post-domain">mobileidworld.com</span>
+          <span class="post-dot"></span>
+          <span class="post-date">apr 23, 2025</span>
+        </div>
+        <div class="post-title">EU Develops Independent Payment System to Reduce Reliance on Global Providers</div>
+        <p class="post-excerpt">The EU is building its own payment infrastructure to reduce dependence on Visa, Mastercard, and US-based processors — part of a broader push for digital sovereignty.</p>
+        <span class="post-read">read →</span>
+      </div>
+    </a>
+  </article>
+
+  <!-- jan 21 2025 -->
+  <article class="post-entry">
+    <a class="post-link" href="https://gist.github.com/hackermondev/45a3cdfa52246f1d1201c1e8cdef6117" target="_blank" rel="noopener">
+      <span class="post-stripe" style="background:#f97316"></span>
+      <div class="post-body">
+        <div class="post-meta-row">
+          <span class="post-domain">gist.github.com</span>
+          <span class="post-dot"></span>
+          <span class="post-date">jan 21, 2025</span>
+        </div>
+        <div class="post-title">I'm 15 and I Think I Found a Bug Affecting 10 Million+ Apps</div>
+        <p class="post-excerpt">A teenager discovers a significant security flaw in a widely-used service through methodical, independent research — a good reminder that age isn't a barrier to serious security work.</p>
+        <span class="post-read">read →</span>
+      </div>
+    </a>
+  </article>
+
+</main>
+
+<footer class="page-footer">
+  <a href="./index.html">◈ shuuino.party</a> &nbsp;·&nbsp; all posts &nbsp;·&nbsp;
+  <a href="./feed.xml">rss</a>
+</footer>
+
+</body>
+</html>

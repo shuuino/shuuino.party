@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+   <link rel="icon" type="image/x-icon" href="icon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>500 · shuuino.party</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Gochi+Hand&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html,body{height:100%;overflow:hidden}
+    :root{
+      --bg:#0d0118;--ink:#ede6ff;--muted:#9b8ab8;--faint:#3d2860;
+      --accent:#f97316;--glow:#fb923c;
+      --card-bg:rgba(18,4,32,.92);--card-bdr:rgba(249,115,22,.2);
+    }
+    body{
+      background:var(--bg);color:var(--ink);
+      font-family:'Space Mono',monospace;
+      display:flex;align-items:center;justify-content:center;min-height:100vh;
+      background-image:
+        radial-gradient(ellipse 70vw 50vh at 30% 20%,rgba(200,80,20,.15) 0%,transparent 65%),
+        radial-gradient(ellipse 50vw 40vh at 75% 75%,rgba(249,115,22,.1) 0%,transparent 60%),
+        repeating-linear-gradient(0deg, transparent,transparent 39px,rgba(150,80,255,.03) 39px,rgba(150,80,255,.03) 40px),
+        repeating-linear-gradient(90deg,transparent,transparent 39px,rgba(150,80,255,.03) 39px,rgba(150,80,255,.03) 40px);
+    }
+    .error-box{
+      text-align:center;padding:3rem 2.5rem;max-width:420px;
+      background:var(--card-bg);border:1px solid var(--card-bdr);
+      border-radius:10px;box-shadow:0 4px 40px rgba(249,115,22,.15);
+      animation:fadeIn .5s ease forwards;
+    }
+    @keyframes fadeIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+    @keyframes shake{
+      0%,100%{transform:translateX(0)}
+      20%{transform:translateX(-4px)}40%{transform:translateX(4px)}
+      60%{transform:translateX(-3px)}80%{transform:translateX(3px)}
+    }
+    @keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+    .error-code{
+      font-family:'Gochi Hand',cursive;font-size:6rem;line-height:1;
+      color:var(--accent);
+      text-shadow:0 0 20px rgba(249,115,22,.5),0 0 60px rgba(249,115,22,.2);
+      display:block;margin-bottom:.5rem;
+      animation:shake .6s ease .3s both;
+    }
+    .error-title{font-family:'Gochi Hand',cursive;font-size:1.6rem;color:var(--ink);margin-bottom:.8rem}
+    .error-desc{font-size:.72rem;color:var(--muted);line-height:1.7;letter-spacing:.02em;margin-bottom:2rem}
+    .error-cursor{display:inline-block;width:2px;height:1em;background:var(--accent);vertical-align:text-bottom;animation:blink 1s step-end infinite;margin-left:1px}
+    .home-btn{
+      display:inline-flex;align-items:center;gap:.5rem;
+      font-family:'Space Mono',monospace;font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;
+      color:var(--accent);text-decoration:none;
+      border:1px solid rgba(249,115,22,.4);padding:.6rem 1.4rem;border-radius:6px;
+      background:rgba(180,60,10,.15);
+      transition:background .15s,box-shadow .15s,transform .15s;
+    }
+    .home-btn:hover{background:rgba(220,80,10,.25);box-shadow:0 0 18px rgba(249,115,22,.3);transform:translateY(-1px)}
+    .home-btn::before{content:'←';font-size:.8rem}
+    .error-footer{margin-top:2rem;font-size:.58rem;color:var(--faint);letter-spacing:.06em}
+    .error-footer a{color:var(--faint);text-decoration:none}
+    .error-footer a:hover{color:var(--muted)}
+  </style>
+</head>
+<body>
+  <div class="error-box">
+    <span class="error-code">500</span>
+    <h1 class="error-title">server error<span class="error-cursor"></span></h1>
+    <p class="error-desc">
+      something broke on the server side.<br>
+      not your fault — try refreshing, or come back later.
+    </p>
+    <a class="home-btn" href="/">back to home</a>
+    <p class="error-footer"><a href="/">shuuino.party</a> &nbsp;·&nbsp; error 500</p>
+  </div>
+</body>
+</html>
