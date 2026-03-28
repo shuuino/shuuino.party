@@ -127,10 +127,46 @@ enjoy the mess that is this code, ig
         repeating-linear-gradient(90deg,transparent,transparent 39px,rgba(150,80,255,.03) 39px,rgba(150,80,255,.03) 40px);
     }
 
-    #particles{
+    /* ══════════════════════════════════════════════════════════
+       STARS BACKGROUND
+    ══════════════════════════════════════════════════════════ */
+    #stars-container{
       position:fixed; inset:0; width:100%; height:100%;
-      pointer-events:none; z-index:1;
+      pointer-events:none; z-index:1; overflow:hidden;
     }
+
+    @keyframes starTwinkle{
+      0%  {transform:scale(1);   opacity:var(--star-base-opacity,.6)}
+      50% {transform:scale(1.5); opacity:1}
+      100%{transform:scale(1);   opacity:var(--star-base-opacity,.6)}
+    }
+    @keyframes shootingStar{
+      0%  {transform:translateX(0)     translateY(0);     opacity:0}
+      5%  {opacity:1}
+      15% {transform:translateX(220px) translateY(220px); opacity:0}
+      100%{transform:translateX(220px) translateY(220px); opacity:0}
+    }
+
+    .star{
+      position:absolute; border-radius:50%; background:#fff;
+      will-change:transform,opacity;
+    }
+    .star.animated{
+      animation:starTwinkle var(--star-dur,3s) ease-in-out infinite;
+      animation-delay:var(--star-delay,0s);
+    }
+    .shooting{
+      position:absolute; width:2px; height:2px; border-radius:50%;
+      background:#fff;
+      box-shadow:0 0 4px #fff,0 0 8px #b06bff;
+      will-change:transform,opacity;
+      animation:shootingStar var(--shoot-dur,10s) linear infinite;
+      animation-delay:var(--shoot-delay,0s);
+    }
+
+    /* low-perf: freeze twinkle to static dots, hide shooting stars */
+    html.low-perf .star.animated{animation:none!important}
+    html.low-perf .shooting{display:none!important}
 
     .site-header,.grid-section,.blog-section,footer,hr.divider{position:relative;z-index:2}
 
@@ -855,7 +891,7 @@ enjoy the mess that is this code, ig
     html.low-perf *,
     html.low-perf *::before,
     html.low-perf *::after{animation:none!important;transition:none!important}
-    html.low-perf #particles{display:none}
+    /* stars: twinkle frozen to static dots, shooting stars hidden — handled per-class above */
     html.low-perf .perf-notice{display:block}
     html.low-perf .site-nav a{opacity:1}
     html.low-perf .cursor-sparkle{display:none!important}
@@ -893,12 +929,15 @@ enjoy the mess that is this code, ig
     html.brave-mode .neon-main::after,
     html.brave-mode .neon-suffix::after,
     html.brave-mode .neon-sign-wrap::before,
+    html.brave-mode .star.animated,
+    html.brave-mode .shooting,
     html.brave-mode .item-content::after,
     html.brave-mode .drag-hint,
     html.brave-mode .music-bars span,
     html.brave-mode footer::before,
     html.brave-mode .cursor-sparkle
     {animation:none!important}
+    html.brave-mode .shooting{display:none!important}
     html.brave-mode .site-nav a{opacity:1!important}
 
     /* ══════════════════════════════════════════════════════════
@@ -960,7 +999,7 @@ enjoy the mess that is this code, ig
 <body>
 
 <div id="bg-layer" aria-hidden="true"></div>
-<canvas id="particles" aria-hidden="true"></canvas>
+<div id="stars-container" aria-hidden="true"></div>
 
 <!-- LOADER -->
 <div id="loader"><span id="loader-heart">&lt;3</span></div>
@@ -997,13 +1036,12 @@ enjoy the mess that is this code, ig
             <p class="bio-text">
               Hey, I'm <em>shuuino</em> - cs student (self-taught webdev though!), online 'activist' & aspiring cybersec specialist. This is a website I made in my free time to share stuff I find interesting online. <br><br>
               This site is a perpetual work in progress, so expect things to be broken or missing - I'm still learning and experimenting with new features and designs, and I have a long list of things I want to add but haven't gotten around to yet. <br><br>
-              Feel free to steal code (though it's an absolute mess so good luck) or view the code on <a href="https://github.com/shuuino/shuuino.party" target="_blank" rel="noopener">github</a>.
+              Feel free to steal code (though it's an absolute mess so good luck) or view the code on <a href="https://github.com/zqr-gg/shuuino.party" target="_blank" rel="noopener">github</a>.
             </p>
             <div class="tags" style="margin-top:.8rem">
               <span class="tag">he/him/whatever</span>
               <span class="tag">18</span>
               <span class="tag">france 🇫🇷</span>
-              <span class="tag">aroace</span>
             </div>
           </div>
         </div>
@@ -1365,7 +1403,7 @@ enjoy the mess that is this code, ig
     <a href="#">home</a>
     <a href="./blog.html">blog</a>
     <a href="./feed.xml">rss</a>
-    <a href="https://github.com/shuuino/shuuino.party" target="_blank" rel="noopener">source code</a>
+    <a href="https://github.com/zqr-gg/shuuino.party" target="_blank" rel="noopener">source code</a>
   </div>
   <p style="margin-top:.15rem">feel free to take inspiration, but please don't copy wholesale</p>
   <img class="footer-gif"
@@ -1417,8 +1455,7 @@ enjoy the mess that is this code, ig
  *     window.isBrave = brave;
  *     if(brave){
  *       document.documentElement.classList.add('brave-mode');
- *       var c=document.getElementById('particles');
- *       if(c) c.style.display='none';
+ *       /* shooting stars + twinkle hidden via CSS brave-mode rules
  *     }
  *   });
  * }
@@ -1504,81 +1541,101 @@ window.isBrave = false; /* placeholder so initParticles check doesn't throw */
 
 
 /* ════════════════════════════════════════════════════════════
-   PARTICLES
-   Disabled entirely on Brave (isBrave flag set above).
-   Particle count scales with screen area so mobile doesn't
-   run 55 dots on a 390px screen.
+   STARS BACKGROUND
+   Static stars always present. Twinkle animation + shooting
+   stars only run outside low-perf / Brave mode.
+   Star count scales with screen area.
+   Shooting stars pause when the tab is hidden.
 ════════════════════════════════════════════════════════════ */
 window.initParticles = (function(){
   var started=false;
   return function(){
     if(started) return;
-    if(document.documentElement.classList.contains('low-perf')) return;
-    if(window.isBrave) return;
     started=true;
 
-    var canvas=document.getElementById('particles');
-    var ctx=canvas.getContext('2d');
-    var timerId=null,W,H;
-    var COLORS=['rgba(176,107,255,','rgba(224,64,251,','rgba(126,232,250,','rgba(200,140,255,','rgba(255,200,255,'];
-    var INTERVAL=1000/30;
+    var container=document.getElementById('stars-container');
+    if(!container) return;
 
-    function calcN(){
-      return Math.max(15, Math.round(55*(W*H)/(1920*1080)));
-    }
-    var particles=[];
+    var isLowPerf=document.documentElement.classList.contains('low-perf');
+    var isBraveMode=window.isBrave;
 
-    function rand(a,b){return a+Math.random()*(b-a);}
-    function buildGradient(p){
-      var gr=ctx.createRadialGradient(0,0,0,0,0,p.r*4);
-      gr.addColorStop(0,p.color+(p.alpha*.5).toFixed(2)+')');
-      gr.addColorStop(1,p.color+'0)');
-      p.grad=gr; p.fill=p.color+p.alpha.toFixed(2)+')';
-    }
-    function makeParticle(fromBottom){
-      var p={
-        x:rand(0,W),y:fromBottom?rand(H*.5,H+20):rand(0,H),
-        r:rand(.8,2.8),speed:rand(.6,2.2),alpha:rand(.2,.7),
-        aDir:Math.random()>.5?1:-1,aSpeed:rand(.01,.04),
-        color:COLORS[Math.floor(Math.random()*COLORS.length)],
-        drift:rand(-.4,.4),grad:null,fill:null
-      };
-      buildGradient(p);return p;
-    }
-    function resize(){
-      W=canvas.width=window.innerWidth;H=canvas.height=window.innerHeight;
-      var target=calcN();
-      while(particles.length<target) particles.push(makeParticle(false));
-      if(particles.length>target) particles.length=target;
-      for(var i=0;i<particles.length;i++) buildGradient(particles[i]);
-    }
-    function frame(){
-      if(!document.hidden){
-        ctx.clearRect(0,0,W,H);
-        for(var i=0;i<particles.length;i++){
-          var p=particles[i];
-          p.y-=p.speed;p.x+=p.drift;p.alpha+=p.aSpeed*p.aDir;
-          if(p.alpha>.75||p.alpha<.1) p.aDir*=-1;
-          if(p.y<-6){particles[i]=makeParticle(true);continue;}
-          if((i+Math.floor(p.alpha*100))%6===0) p.fill=p.color+p.alpha.toFixed(2)+')';
-          ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-          ctx.fillStyle=p.fill;ctx.fill();
-          ctx.save();ctx.translate(p.x,p.y);
-          ctx.beginPath();ctx.arc(0,0,p.r*4,0,Math.PI*2);
-          ctx.fillStyle=p.grad;ctx.fill();ctx.restore();
-        }
+    var W=window.innerWidth, H=window.innerHeight;
+    /* scale star count with screen area, clamped */
+    function calcN(){ return Math.max(60, Math.round(160*(W*H)/(1920*1080))); }
+
+    function rand(a,b){ return a+Math.random()*(b-a); }
+
+    /* purple-tinted star colors matching site palette */
+    var TINTS=['255,255,255','220,180,255','180,160,255','200,220,255'];
+
+    function makeStar(){
+      var el=document.createElement('div');
+      el.className='star';
+
+      var x=rand(0,100), y=rand(0,100);
+      var size=rand(0.8, 2.6);
+      var baseOpacity=rand(0.25, 0.7);
+      var tint=TINTS[Math.floor(Math.random()*TINTS.length)];
+
+      el.style.left=x+'%';
+      el.style.top=y+'%';
+      el.style.width=size+'px';
+      el.style.height=size+'px';
+      el.style.background='rgba('+tint+','+baseOpacity+')';
+      el.style.setProperty('--star-base-opacity', baseOpacity);
+
+      /* only animate if not low-perf and not brave */
+      if(!isLowPerf && !isBraveMode){
+        el.classList.add('animated');
+        var dur=rand(2,5);
+        var delay=rand(0,4);
+        el.style.setProperty('--star-dur', dur+'s');
+        el.style.setProperty('--star-delay', '-'+delay+'s'); /* start mid-cycle */
       }
-      timerId=setTimeout(frame,INTERVAL);
+
+      return el;
     }
-    resize();
-    for(var i=0;i<calcN();i++) particles.push(makeParticle(false));
-    window.addEventListener('resize',resize);
+
+    function makeShooting(leftPct, topPct, dur, delay){
+      var el=document.createElement('div');
+      el.className='shooting';
+      el.style.left=leftPct;
+      el.style.top=topPct;
+      el.style.setProperty('--shoot-dur', dur+'s');
+      el.style.setProperty('--shoot-delay', delay+'s');
+      return el;
+    }
+
+    function build(){
+      container.innerHTML='';
+      W=window.innerWidth; H=window.innerHeight;
+      var n=calcN();
+      for(var i=0;i<n;i++) container.appendChild(makeStar());
+
+      /* shooting stars — skip in low-perf/brave */
+      if(!isLowPerf && !isBraveMode){
+        container.appendChild(makeShooting('15%','10%', 8,  0));
+        container.appendChild(makeShooting('65%','20%', 12, 4));
+        container.appendChild(makeShooting('40%','5%',  18, 9));
+        container.appendChild(makeShooting('80%','35%', 14, 6));
+      }
+    }
+
+    /* pause shooting star animations when tab is hidden */
     document.addEventListener('visibilitychange',function(){
-      if(document.hidden){clearTimeout(timerId);timerId=null;}
-      else if(!timerId){timerId=setTimeout(frame,INTERVAL);}
+      var state=document.hidden?'paused':'running';
+      var shooters=container.querySelectorAll('.shooting');
+      for(var i=0;i<shooters.length;i++) shooters[i].style.animationPlayState=state;
     });
-    timerId=setTimeout(frame,INTERVAL);
-    canvas.style.display='';
+
+    /* rebuild on resize (debounced) */
+    var resizeTimer;
+    window.addEventListener('resize',function(){
+      clearTimeout(resizeTimer);
+      resizeTimer=setTimeout(build, 250);
+    });
+
+    build();
   };
 })();
 window.initParticles();
