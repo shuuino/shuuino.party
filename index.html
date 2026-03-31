@@ -60,7 +60,6 @@ enjoy the mess that is this code, ig
     @keyframes glowPulse          {0%,100%{opacity:.55} 50%{opacity:.9}}
     @keyframes cardGlowOverlay    {0%,100%{opacity:0}   50%{opacity:1}}
     @keyframes accentCardGlowOverlay{0%,100%{opacity:0} 50%{opacity:1}}
-    @keyframes footerGlow         {0%,100%{opacity:.2}  50%{opacity:.38}}
     @keyframes hintBounce         {0%,100%{transform:translateX(0)} 50%{transform:translateX(4px)}}
     @keyframes barDance           {0%,100%{transform:scaleY(.3)}    50%{transform:scaleY(1)}}
     @keyframes nopePulse{
@@ -999,7 +998,6 @@ enjoy the mess that is this code, ig
     footer::before{
       content:'';position:absolute;bottom:-60px;left:50%;transform:translateX(-50%);
       width:500px;height:180px;border-radius:50%;
-      background:radial-gradient(ellipse,rgba(120,40,220,.2) 0%,transparent 70%);
       pointer-events:none;filter:blur(14px);
       animation:footerGlow 6s ease-in-out infinite;
     }
@@ -1387,7 +1385,7 @@ enjoy the mess that is this code, ig
           <div class="card-handle"><span>◈ version</span><div class="card-win-btns"><span class="card-win-btn">─</span><span class="card-win-btn">□</span><span class="card-win-btn win-close">×</span></div></div>
           <div class="card-body">
             <p class="version-label">current version</p>
-            <p class="version-num">3.1.4</p>
+            <p class="version-num">3.1.5</p>
           </div>
         </div>
       </div>
