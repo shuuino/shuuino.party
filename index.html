@@ -167,7 +167,7 @@ enjoy the mess that is this code, ig
     html.low-perf .star.animated{animation:none!important}
     html.low-perf .shooting{display:none!important}
 
-    .site-header,.grid-section,.blog-section,footer,.divider{position:relative;z-index:2}
+    .site-header,.grid-section,.repost-section,footer,.divider{position:relative;z-index:2}
 
     ::selection{background:rgba(176,107,255,.35)}
     a{color:var(--accent2);transition:color .15s}
@@ -776,18 +776,18 @@ enjoy the mess that is this code, ig
     }
 
     /* ══════════════════════════════════════════════════════════
-       BLOG SECTION
+       repost SECTION
     ══════════════════════════════════════════════════════════ */
-    .blog-section{max-width:760px;margin:0 auto;padding:2.8rem 1.5rem 3.2rem;contain:layout}
-    .blog-section .section-label{margin-bottom:1.6rem}
-    .blog-all-btn{
+    .repost-section{max-width:760px;margin:0 auto;padding:2.8rem 1.5rem 3.2rem;contain:layout}
+    .repost-section .section-label{margin-bottom:1.6rem}
+    .repost-all-btn{
       display:inline-block;margin-top:1.8rem;font-family:'Pixelify Sans',monospace;
       font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);
       text-decoration:none;border:2px solid var(--card-bdr);padding:.45rem 1.1rem;
       border-radius:0;background:rgba(100,40,180,.1);
       transition:color .2s,border-color .2s,box-shadow .2s;
     }
-    .blog-all-btn:hover{color:var(--accent);border-color:rgba(190,110,255,.5);box-shadow:2px 2px 0 rgba(150,80,255,.3)}
+    .repost-all-btn:hover{color:var(--accent);border-color:rgba(190,110,255,.5);box-shadow:2px 2px 0 rgba(150,80,255,.3)}
 
     /* ══════════════════════════════════════════════════════════
        CAMPAIGN STRIP
@@ -866,20 +866,20 @@ enjoy the mess that is this code, ig
     .cl-chat:hover{box-shadow:3px 0 0 #e879f9}
 
     /* ══════════════════════════════════════════════════════════
-       BLOG POST CARDS
+       repost POST CARDS
     ══════════════════════════════════════════════════════════ */
-    .blog-section-inner{
+    .repost-section-inner{
       border:2px solid var(--card-bdr);
       border-top:none;
       background:var(--card-bg);
       padding:.75rem .9rem;
       position:relative;
     }
-    .blog-section-inner::before{
+    .repost-section-inner::before{
       content:'';position:absolute;inset:4px;
       border:1px dashed rgba(150,80,255,.1);pointer-events:none;
     }
-    .blog-section-titlebar{
+    .repost-section-titlebar{
       font-family:'Pixelify Sans',monospace;font-size:.72rem;letter-spacing:.1em;
       text-transform:uppercase;color:#fff;
       display:flex;align-items:center;justify-content:space-between;
@@ -889,40 +889,40 @@ enjoy the mess that is this code, ig
       text-shadow:0 1px 3px rgba(0,0,0,.5);
       margin-bottom:0;
     }
-    .blog-post{display:block;padding:0;border-bottom:1px solid rgba(150,80,255,.12);margin-bottom:0;position:relative;z-index:1}
-    .blog-post:last-of-type{border-bottom:none}
-    .blog-card{
+    .repost-post{display:block;padding:0;border-bottom:1px solid rgba(150,80,255,.12);margin-bottom:0;position:relative;z-index:1}
+    .repost-post:last-of-type{border-bottom:none}
+    .repost-card{
       display:grid;grid-template-columns:4px 1fr;gap:0 .85rem;
       padding:1.1rem 0;text-decoration:none;color:inherit;cursor:pointer;
     }
-    .blog-card-stripe{background:var(--accent);flex-shrink:0;align-self:stretch;min-height:100%}
-    .blog-card-meta{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;margin-bottom:.3rem}
-    .blog-card-domain{font-family:'Space Mono',monospace;font-size:.52rem;letter-spacing:.06em;color:var(--faint);text-transform:lowercase}
-    .blog-card-date{font-family:'Space Mono',monospace;font-size:.52rem;color:var(--faint)}
-    .blog-card-dot{width:3px;height:3px;border-radius:50%;background:var(--faint);opacity:.5}
-    .blog-card-title{
+    .repost-card-stripe{background:var(--accent);flex-shrink:0;align-self:stretch;min-height:100%}
+    .repost-card-meta{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;margin-bottom:.3rem}
+    .repost-card-domain{font-family:'Space Mono',monospace;font-size:.52rem;letter-spacing:.06em;color:var(--faint);text-transform:lowercase}
+    .repost-card-date{font-family:'Space Mono',monospace;font-size:.52rem;color:var(--faint)}
+    .repost-card-dot{width:3px;height:3px;border-radius:50%;background:var(--faint);opacity:.5}
+    .repost-card-title{
       font-family:'Pixelify Sans',monospace;font-size:.88rem;font-weight:700;line-height:1.3;
       color:var(--ink);margin-bottom:.3rem;transition:color .15s;
     }
-    .blog-card:hover .blog-card-title{color:var(--accent)}
-    .blog-card-excerpt{
+    .repost-card:hover .repost-card-title{color:var(--accent)}
+    .repost-card-excerpt{
       font-size:.75rem;font-style:italic;color:var(--muted);line-height:1.5;
       display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;
       line-clamp:2;overflow:hidden;
     }
-    .blog-card-read{
+    .repost-card-read{
       display:inline-block;margin-top:.4rem;
       font-family:'Space Mono',monospace;font-size:.55rem;letter-spacing:.08em;
       text-transform:uppercase;color:var(--accent2);transition:color .15s;
     }
-    .blog-card:hover .blog-card-read{color:var(--glow)}
+    .repost-card:hover .repost-card-read{color:var(--glow)}
 
     /* video embed */
-    .blog-card-video-wrap{
+    .repost-card-video-wrap{
       position:relative;width:100%;margin:.5rem 0 .4rem;
       overflow:hidden;background:#000;aspect-ratio:16/9;
     }
-    .blog-card-video-wrap iframe{
+    .repost-card-video-wrap iframe{
       position:absolute;inset:0;width:100%;height:100%;border:0;
     }
 
@@ -1385,7 +1385,7 @@ enjoy the mess that is this code, ig
           <div class="card-handle"><span>◈ version</span><div class="card-win-btns"><span class="card-win-btn">─</span><span class="card-win-btn">□</span><span class="card-win-btn win-close">×</span></div></div>
           <div class="card-body">
             <p class="version-label">current version</p>
-            <p class="version-num">3.1.5</p>
+            <p class="version-num">3.1.6</p>
           </div>
         </div>
       </div>
@@ -1415,7 +1415,7 @@ enjoy the mess that is this code, ig
             <div class="changelog-scroll">
               <ul class="changelog-list">
                 <li class="changelog-item">Preload song when hovering over forward button</li>
-                <li class="changelog-item">Preload blog page when hovering over blog button</li>
+                <li class="changelog-item">Preload repost page when hovering over repost button</li>
                 <li class="changelog-item">Preload articles when hovering "read more" (if possible)</li>
                 <li class="changelog-item">Change entire article being an &lt;a&gt; to just "read more"</li>
                 <li class="changelog-item">hopefully fix Brave browser compatibility</li>
@@ -1473,7 +1473,7 @@ enjoy the mess that is this code, ig
 </div>
 
 <!--
-  BLOG - external articles i find interesting
+  repost - external articles i find interesting
   ═══════════════════════════════════════════════════════
   TO UPDATE: copy one POST block, paste it at the top of
   the list, fill in the fields, delete the oldest at the
@@ -1487,73 +1487,74 @@ enjoy the mess that is this code, ig
     title       = article title
     excerpt     = 1-2 sentence teaser
 
-  FOR VIDEO POSTS: use blog-card-video-wrap with an <img>
-  thumbnail (hqdefault.jpg) + .blog-card-play-btn overlay.
+  FOR VIDEO POSTS: use repost-card-video-wrap with an <img>
+  thumbnail (hqdefault.jpg) + .repost-card-play-btn overlay.
   ═══════════════════════════════════════════════════════
 -->
-<section class="blog-section">
-  <div class="blog-section-titlebar">
-    <span>◈ from the blog</span>
+<section class="repost-section">
+  <div class="repost-section-titlebar">
+    <span>◈ Stuff i repost</span>
   </div>
-  <div class="blog-section-inner">
+  <div class="repost-section-inner">
 
-  <!-- POST 1 - march 20 2026, YouTube video -->
-  <article class="blog-post reveal">
-    <div class="blog-card" style="cursor:default;">
-      <span class="blog-card-stripe" style="background:#ff4444"></span>
-      <div class="blog-card-body">
-        <div class="blog-card-meta">
-          <span class="blog-card-domain">youtube.com</span>
-          <span class="blog-card-dot"></span>
-          <span class="blog-card-date">mar 20, 2026</span>
+<!-- POST - march 28 2026 -->
+  <article class="repost-post reveal">
+    <a class="repost-card" href="https://blog.thereallo.dev/blog/decompiling-the-white-house-app" target="_blank" rel="noopener">
+      <span class="repost-card-stripe" style="background:#60a5fa"></span>
+      <div class="repost-card-body">
+        <div class="repost-card-meta">
+          <span class="repost-card-domain">blog.thereallo.dev</span>
+          <span class="repost-card-dot"></span>
+          <span class="repost-card-date">mar 28, 2026</span>
         </div>
-        <div class="blog-card-title">▶ video</div>
-        <div class="blog-card-video-wrap">
-          <iframe width="560" height="315" src="https://www.youtube.com/embed/xFKSKjyBVDU?si=IhuprBEhvvs4UtGi" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-        </div>
-        <a class="blog-card-read" href="https://www.youtube.com/watch?v=xFKSKjyBVDU" target="_blank" rel="noopener">watch on youtube →</a>
-      </div>
-    </div>
-  </article>
-
-  <!-- POST 2 - march 13 2026 -->
-  <article class="blog-post reveal">
-    <a class="blog-card" href="https://github.com/upper-up/meta-lobbying-and-other-findings" target="_blank" rel="noopener">
-      <span class="blog-card-stripe" style="background:#6e40c9"></span>
-      <div class="blog-card-body">
-        <div class="blog-card-meta">
-          <span class="blog-card-domain">github.com</span>
-          <span class="blog-card-dot"></span>
-          <span class="blog-card-date">mar 13, 2026</span>
-        </div>
-        <div class="blog-card-title">Meta Lobbying and Other Findings</div>
-        <p class="blog-card-excerpt">A documented collection of Meta's lobbying activity and policy influence — the kind of thing that doesn't make headlines but shapes the rules everyone has to live by.</p>
-        <span class="blog-card-read">read →</span>
+        <div class="repost-card-title">I Decompiled the White House's New App</div>
+        <p class="repost-card-excerpt">The official White House Android app has a cookie/paywall bypass injector, tracks your GPS every 4.5 minutes, and loads JavaScript from some guy's GitHub Pages.</p>
+        <span class="repost-card-read">read →</span>
       </div>
     </a>
   </article>
 
-  <!-- POST 3 - march 11 2026 -->
-  <article class="blog-post reveal">
-    <a class="blog-card" href="https://www.patrick-breyer.de/en/historic-chat-control-vote-in-the-eu-parliament-meps-vote-to-end-untargeted-mass-scanning-of-private-chats/" target="_blank" rel="noopener">
-      <span class="blog-card-stripe" style="background:#60a5fa"></span>
-      <div class="blog-card-body">
-        <div class="blog-card-meta">
-          <span class="blog-card-domain">patrick-breyer.de</span>
-          <span class="blog-card-dot"></span>
-          <span class="blog-card-date">mar 11, 2026</span>
+  <!-- POST - march 20 2026, YouTube video -->
+   <!-- fun fact - did you know youtube won't embed on local pages (ie you have to put the page online to check if it's working or not)? I definitely didn't spend multiple hours trying to figure out why I kept getting error 153 uh-huh <3 -->
+  <article class="repost-post reveal">
+    <div class="repost-card" style="cursor:default;">
+      <span class="repost-card-stripe" style="background:#ff4444"></span>
+      <div class="repost-card-body">
+        <div class="repost-card-meta">
+          <span class="repost-card-domain">youtube.com</span>
+          <span class="repost-card-dot"></span>
+          <span class="repost-card-date">mar 20, 2026</span>
         </div>
-        <div class="blog-card-title">Historic Chat Control Vote: MEPs Block Mass Scanning of Private Chats</div>
-        <p class="blog-card-excerpt">The EU Parliament voted to reject untargeted surveillance of all private messages. A significant win for encrypted communication, though the fight is far from over.</p>
-        <span class="blog-card-read">read →</span>
+        <div class="repost-card-title">▶ video</div>
+        <div class="repost-card-video-wrap">
+          <iframe width="560" height="315" src="https://www.youtube.com/embed/xFKSKjyBVDU?si=IhuprBEhvvs4UtGi" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
+        <a class="repost-card-read" href="https://www.youtube.com/watch?v=xFKSKjyBVDU" target="_blank" rel="noopener">watch on youtube →</a>
+      </div>
+    </div>
+  </article>
+
+  <!-- POST - march 13 2026 -->
+  <article class="repost-post reveal">
+    <a class="repost-card" href="https://github.com/upper-up/meta-lobbying-and-other-findings" target="_blank" rel="noopener">
+      <span class="repost-card-stripe" style="background:#6e40c9"></span>
+      <div class="repost-card-body">
+        <div class="repost-card-meta">
+          <span class="repost-card-domain">github.com</span>
+          <span class="repost-card-dot"></span>
+          <span class="repost-card-date">mar 13, 2026</span>
+        </div>
+        <div class="repost-card-title">Meta Lobbying and Other Findings</div>
+        <p class="repost-card-excerpt">A documented collection of Meta's lobbying activity and policy influence — the kind of thing that doesn't make headlines but shapes the rules everyone has to live by.</p>
+        <span class="repost-card-read">read →</span>
       </div>
     </a>
   </article>
 
   <div style="text-align:center;padding:.75rem 0 .25rem;position:relative;z-index:1">
-    <a href="./blog.html" class="blog-all-btn">all posts →</a>
+    <a href="./repost.html" class="repost-all-btn">all posts →</a>
   </div>
-  </div><!-- /.blog-section-inner -->
+  </div><!-- /.repost-section-inner -->
 </section>
 
 <!-- FOOTER -->
@@ -1561,7 +1562,7 @@ enjoy the mess that is this code, ig
   <span class="footer-title">shuuino.party ◈</span>
   <div class="footer-links">
     <a href="#">home</a>
-    <a href="./blog.html">blog</a>
+    <a href="./repost.html">reposts</a>
     <a href="./feed.xml">rss</a>
     <a href="https://github.com/shuuino/shuuino.party" target="_blank" rel="noopener">source code</a>
   </div>
