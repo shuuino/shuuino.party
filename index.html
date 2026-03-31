@@ -1,5 +1,5 @@
 <!--
-All css, javascript & html is in the same file, because (in theory) it means one request so a faster website, but I haven't actually gotten to measure the difference yet.
+All css, javascript & html is in the same file, because (in theory) it means one request so a faster website (tfw too lazy to seperate it), but I haven't actually gotten to measure the difference yet.
 enjoy the mess that is this code, ig
 -->
 
@@ -23,7 +23,7 @@ enjoy the mess that is this code, ig
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Gochi+Hand&family=Lora:ital,wght@0,400;1,400&family=Space+Mono:wght@400;700&family=Fredoka+One&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Gochi+Hand&family=Lora:ital,wght@0,400;1,400&family=Space+Mono:wght@400;700&family=Fredoka+One&family=Pixelify+Sans:wght@400;700&display=swap" rel="stylesheet" />
 
   <style>
     /* ══════════════════════════════════════════════════════════
@@ -168,7 +168,7 @@ enjoy the mess that is this code, ig
     html.low-perf .star.animated{animation:none!important}
     html.low-perf .shooting{display:none!important}
 
-    .site-header,.grid-section,.blog-section,footer,hr.divider{position:relative;z-index:2}
+    .site-header,.grid-section,.blog-section,footer,.divider{position:relative;z-index:2}
 
     ::selection{background:rgba(176,107,255,.35)}
     a{color:var(--accent2);transition:color .15s}
@@ -213,8 +213,6 @@ enjoy the mess that is this code, ig
       text-shadow:none;
       position:relative;
     }
-
-    .site-sub{font-size:.85rem;font-style:italic;color:var(--muted);margin-top:.55rem}
 
     /* ══════════════════════════════════════════════════════════
        NEON SIGN TITLE
@@ -413,30 +411,40 @@ enjoy the mess that is this code, ig
     .item.muuri-item-hidden   {opacity:0!important}
 
     .item-content{
-      background:var(--card-bg); border:1px solid var(--card-bdr);
-      border-radius:var(--radius);
-      box-shadow:0 2px 16px var(--shadow),inset 0 1px 0 rgba(200,140,255,.07);
+      background:var(--card-bg);
+      border:2px solid var(--card-bdr);
+      border-radius:0;
+      box-shadow:3px 3px 0 rgba(150,80,255,.2), inset 0 0 0 1px rgba(150,80,255,.08);
       transition:box-shadow .25s,transform .15s;
       position:relative;
     }
 
+    .item-content::before{
+      content:'';
+      position:absolute;
+      inset:3px;
+      border:1px dashed rgba(150,80,255,.12);
+      pointer-events:none;
+      z-index:0;
+    }
+
     .item-clip{
-      border-radius:var(--radius);
+      border-radius:0;
       overflow:hidden;
       position:relative;
       z-index:1;
     }
 
     .item-content::after{
-      content:''; position:absolute; inset:-1px; border-radius:var(--radius);
-      box-shadow:0 0 0 1px rgba(180,100,255,.5),0 4px 28px rgba(160,60,255,.5),0 0 40px rgba(140,50,255,.25);
+      content:''; position:absolute; inset:-2px;
+      box-shadow:0 0 0 2px rgba(180,100,255,.45),3px 3px 0 rgba(150,80,255,.3),0 0 22px rgba(140,50,255,.2);
       opacity:0; pointer-events:none;
       animation:cardGlowOverlay 5s ease-in-out infinite;
       z-index:0;
     }
 
     .item:hover .item-content{
-      box-shadow:0 4px 30px rgba(160,60,255,.28),0 0 0 1px rgba(180,100,255,.25),inset 0 1px 0 rgba(200,140,255,.1);
+      box-shadow:3px 3px 0 rgba(150,80,255,.35),0 0 18px rgba(160,60,255,.2),inset 0 0 0 1px rgba(200,140,255,.08);
     }
 
     /* Staggered glow cycle */
@@ -452,15 +460,34 @@ enjoy the mess that is this code, ig
     .item:nth-child(10) .item-content::after{animation-delay:6.3s}
 
     .card-handle{
-      background:var(--handle-bg); color:var(--accent);
-      font-family:'Space Mono',monospace; font-size:.6rem;
-      letter-spacing:.12em; text-transform:uppercase;
-      padding:.38rem .75rem; cursor:grab; user-select:none;
+      background:linear-gradient(90deg, var(--glow2), var(--glow), var(--glow3));
+      color:#fff;
+      font-family:'Pixelify Sans',monospace; font-size:.72rem;
+      letter-spacing:.06em; text-transform:uppercase;
+      padding:.35rem .6rem; cursor:grab; user-select:none;
       display:flex; align-items:center; justify-content:space-between;
-      border-bottom:1px solid var(--card-bdr);
+      border-bottom:2px solid var(--glow2);
+      text-shadow:0 1px 3px rgba(0,0,0,.5);
     }
     .card-handle:active{cursor:grabbing}
-    .card-handle .drag-dots{opacity:.4;letter-spacing:-.05em}
+
+    /* windows button things */
+    .card-win-btns{
+      display:flex; gap:2px; flex-shrink:0;
+    }
+    .card-win-btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      width:16px; height:14px;
+      background:rgba(0,0,0,.25);
+      border:1px solid rgba(255,255,255,.25);
+      font-size:.5rem; line-height:1;
+      color:rgba(255,255,255,.85);
+      font-family:'Space Mono',monospace;
+      cursor:default; user-select:none;
+      flex-shrink:0;
+    }
+    .card-win-btn:hover{background:rgba(255,255,255,.15)}
+    .card-win-btn.win-close:hover{background:rgba(200,50,50,.7)}
 
     .card-body{padding:.8rem .9rem;font-size:.82rem}
     .card-body h3{
@@ -484,16 +511,20 @@ enjoy the mess that is this code, ig
     ══════════════════════════════════════════════════════════ */
     .item--accent .item-content{
       background:rgba(100,20,180,.55); border-color:rgba(200,100,255,.4);
-      box-shadow:0 4px 24px rgba(180,60,255,.3),inset 0 1px 0 rgba(220,160,255,.12);
+      box-shadow:3px 3px 0 rgba(180,60,255,.25),inset 0 0 0 1px rgba(220,160,255,.06);
     }
     .item--accent .item-content::after{
-      box-shadow:0 0 0 1px rgba(220,100,255,.6),0 6px 40px rgba(200,80,255,.55),0 0 50px rgba(180,60,255,.3);
+      box-shadow:0 0 0 2px rgba(220,100,255,.55),3px 3px 0 rgba(200,80,255,.4),0 0 40px rgba(180,60,255,.25);
       animation:accentCardGlowOverlay 4s ease-in-out infinite;
     }
     .item--accent .item-clip{background:transparent}
     .item--accent .card-body p{color:rgba(220,210,255,.75)}
     .item--accent .card-body h3{color:#f0b0ff;text-shadow:0 0 14px rgba(240,100,255,.5)}
-    .item--accent .card-handle{background:rgba(80,10,150,.6);color:#e0b0ff}
+    .item--accent .card-handle{
+      background:linear-gradient(90deg,#4a0080,#9400d3,#c026d3);
+      border-bottom-color:#4a0080;
+      color:#f0d0ff;
+    }
 
     .music-track-title{
       font-family:'Gochi Hand',cursive; font-size:1.15rem; margin-bottom:.15rem;
@@ -619,7 +650,6 @@ enjoy the mess that is this code, ig
     ══════════════════════════════════════════════════════════ */
     .eighty-eight-grid{display:flex;flex-direction:column;gap:.5rem}
     .btn88-row{display:flex;flex-wrap:wrap;gap:.4rem}
-    .btn88-label{font-family:'Space Mono',monospace;font-size:.58rem;color:var(--faint);margin-bottom:.2rem;text-transform:uppercase;letter-spacing:.08em}
     .btn88{
       width:88px;height:31px;border:1px solid var(--card-bdr);border-radius:2px;
       background:rgba(100,40,180,.12);display:flex;align-items:center;
@@ -732,7 +762,19 @@ enjoy the mess that is this code, ig
     /* ══════════════════════════════════════════════════════════
        DIVIDER LINES
     ══════════════════════════════════════════════════════════ */
-    .divider{border:none;height:1px;background:linear-gradient(90deg,transparent,var(--card-bdr),transparent);margin:0 1.5rem}
+    .divider{
+      border:none;margin:0 1.5rem;
+      text-align:center;position:relative;height:1.2rem;
+      display:flex;align-items:center;justify-content:center;
+      gap:.6rem;
+      font-family:'Space Mono',monospace;font-size:.6rem;
+      color:var(--faint);letter-spacing:.12em;
+      user-select:none;
+    }
+    .divider::before,.divider::after{
+      content:'';flex:1;height:1px;
+      background:linear-gradient(90deg,transparent,var(--card-bdr),transparent);
+    }
 
     /* ══════════════════════════════════════════════════════════
        BLOG SECTION
@@ -740,13 +782,13 @@ enjoy the mess that is this code, ig
     .blog-section{max-width:760px;margin:0 auto;padding:2.8rem 1.5rem 3.2rem;contain:layout}
     .blog-section .section-label{margin-bottom:1.6rem}
     .blog-all-btn{
-      display:inline-block;margin-top:1.8rem;font-family:'Space Mono',monospace;
-      font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);
-      text-decoration:none;border:1px solid var(--card-bdr);padding:.5rem 1.2rem;
-      border-radius:4px;background:rgba(100,40,180,.1);
+      display:inline-block;margin-top:1.8rem;font-family:'Pixelify Sans',monospace;
+      font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);
+      text-decoration:none;border:2px solid var(--card-bdr);padding:.45rem 1.1rem;
+      border-radius:0;background:rgba(100,40,180,.1);
       transition:color .2s,border-color .2s,box-shadow .2s;
     }
-    .blog-all-btn:hover{color:var(--accent);border-color:rgba(190,110,255,.5);box-shadow:0 0 14px rgba(160,60,255,.2)}
+    .blog-all-btn:hover{color:var(--accent);border-color:rgba(190,110,255,.5);box-shadow:2px 2px 0 rgba(150,80,255,.3)}
 
     /* ══════════════════════════════════════════════════════════
        CAMPAIGN STRIP
@@ -757,91 +799,190 @@ enjoy the mess that is this code, ig
       position:relative;z-index:2;
     }
     .campaign-strip-label{
-      font-family:'Space Mono',monospace;font-size:.58rem;letter-spacing:.22em;
-      text-transform:uppercase;color:var(--faint);margin-bottom:1rem;
-      display:flex;align-items:center;gap:.6rem;
+      font-family:'Pixelify Sans',monospace;font-size:.72rem;letter-spacing:.1em;
+      text-transform:uppercase;color:#fff;margin-bottom:0;
+      display:flex;align-items:center;justify-content:space-between;
+      /* titlebar gradient */
+      background:linear-gradient(90deg,var(--glow2),var(--glow),var(--glow3));
+      padding:.35rem .65rem;
+      border-bottom:2px solid var(--glow2);
+      text-shadow:0 1px 3px rgba(0,0,0,.5);
     }
-    .campaign-strip-label::after{
-      content:'';flex:1;height:1px;
-      background:linear-gradient(90deg,rgba(150,80,255,.25),transparent);
+    .campaign-strip-label .win-btns-strip{
+      display:flex;gap:2px;
+    }
+    .campaign-strip-label .wb{
+      display:inline-flex;align-items:center;justify-content:center;
+      width:16px;height:14px;
+      background:rgba(0,0,0,.25);border:1px solid rgba(255,255,255,.25);
+      font-size:.5rem;color:rgba(255,255,255,.85);
+      font-family:'Space Mono',monospace;cursor:default;
+    }
+    .campaign-strip-inner{
+      border:2px solid var(--card-bdr);
+      border-top:none;
+      background:var(--card-bg);
+      padding:.75rem;
+      /* subtle inset dashed detail */
+      position:relative;
+    }
+    .campaign-strip-inner::before{
+      content:'';position:absolute;inset:4px;
+      border:1px dashed rgba(150,80,255,.1);pointer-events:none;
     }
     .campaign-links{
       display:grid;
-      grid-template-columns:repeat(auto-fill,minmax(160px,1fr));
-      gap:.75rem;
+      grid-template-columns:repeat(auto-fill,minmax(155px,1fr));
+      gap:.6rem;
+      position:relative;z-index:1;
     }
     .campaign-link{
-      display:flex;align-items:flex-start;gap:.65rem;
-      font-family:'Space Mono',monospace;font-size:.65rem;letter-spacing:.04em;
+      display:flex;align-items:flex-start;gap:.55rem;
+      font-family:'Pixelify Sans',monospace;font-size:.72rem;letter-spacing:.03em;
       text-decoration:none;
-      padding:.85rem 1rem;
-      border-radius:6px;
+      padding:.7rem .8rem;
+      border-radius:0;
       border-left:3px solid;
-      background:rgba(18,4,32,.85);
+      background:rgba(10,2,20,.7);
       border-top:1px solid rgba(150,80,255,.15);
       border-right:1px solid rgba(150,80,255,.15);
       border-bottom:1px solid rgba(150,80,255,.15);
-      transition:transform .15s,box-shadow .15s;
-      line-height:1.4;font-weight:700;
+      transition:transform .12s,box-shadow .12s;
+      line-height:1.35;font-weight:700;
     }
-    .campaign-link:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,.35)}
-    .campaign-link .cl-icon{font-size:.9rem;line-height:1;flex-shrink:0;margin-top:.05em}
+    .campaign-link:hover{transform:translateX(3px);box-shadow:3px 0 0 currentColor}
+    .campaign-link .cl-icon{font-size:.85rem;line-height:1;flex-shrink:0;margin-top:.1em}
     .campaign-link .cl-name{display:block}
     .campaign-link .cl-desc{
-      display:block;font-family:'Lora',Georgia,serif;
-      font-weight:400;font-style:italic;
-      font-size:.62rem;letter-spacing:0;opacity:.65;margin-top:.2rem;line-height:1.4;
+      display:block;font-family:'Space Mono',monospace;
+      font-weight:400;font-size:.55rem;letter-spacing:0;opacity:.6;margin-top:.2rem;line-height:1.4;
     }
     .cl-android{border-left-color:#3ddc84;color:#3ddc84}
-    .cl-android:hover{box-shadow:0 6px 20px rgba(61,220,132,.2)}
+    .cl-android:hover{box-shadow:3px 0 0 #3ddc84}
     .cl-skg{border-left-color:#f97316;color:#f97316}
-    .cl-skg:hover{box-shadow:0 6px 20px rgba(249,115,22,.2)}
+    .cl-skg:hover{box-shadow:3px 0 0 #f97316}
     .cl-tbote{border-left-color:#60a5fa;color:#60a5fa}
-    .cl-tbote:hover{box-shadow:0 6px 20px rgba(96,165,250,.2)}
+    .cl-tbote:hover{box-shadow:3px 0 0 #60a5fa}
     .cl-chat{border-left-color:#e879f9;color:#e879f9}
-    .cl-chat:hover{box-shadow:0 6px 20px rgba(232,121,249,.2)}
+    .cl-chat:hover{box-shadow:3px 0 0 #e879f9}
 
     /* ══════════════════════════════════════════════════════════
        BLOG POST CARDS
     ══════════════════════════════════════════════════════════ */
-    .blog-post{display:block;padding:0;border-bottom:1px solid rgba(150,80,255,.12);margin-bottom:0}
-    .blog-post:first-of-type .blog-card{padding-top:0}
-    .blog-card{
-      display:grid;grid-template-columns:5px 1fr;gap:0 1rem;
-      padding:1.4rem 0;text-decoration:none;color:inherit;cursor:pointer;
+    .blog-section-inner{
+      border:2px solid var(--card-bdr);
+      border-top:none;
+      background:var(--card-bg);
+      padding:.75rem .9rem;
+      position:relative;
     }
-    .blog-card-stripe{border-radius:3px;background:var(--accent);flex-shrink:0;align-self:stretch;min-height:100%}
-    .blog-card-meta{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;margin-bottom:.35rem}
-    .blog-card-domain{font-family:'Space Mono',monospace;font-size:.55rem;letter-spacing:.06em;color:var(--faint);text-transform:lowercase}
-    .blog-card-date{font-family:'Space Mono',monospace;font-size:.55rem;color:var(--faint)}
+    .blog-section-inner::before{
+      content:'';position:absolute;inset:4px;
+      border:1px dashed rgba(150,80,255,.1);pointer-events:none;
+    }
+    .blog-section-titlebar{
+      font-family:'Pixelify Sans',monospace;font-size:.72rem;letter-spacing:.1em;
+      text-transform:uppercase;color:#fff;
+      display:flex;align-items:center;justify-content:space-between;
+      background:linear-gradient(90deg,var(--glow2),var(--glow),var(--glow3));
+      padding:.35rem .65rem;
+      border-bottom:2px solid var(--glow2);
+      text-shadow:0 1px 3px rgba(0,0,0,.5);
+      margin-bottom:0;
+    }
+    .blog-post{display:block;padding:0;border-bottom:1px solid rgba(150,80,255,.12);margin-bottom:0;position:relative;z-index:1}
+    .blog-post:last-of-type{border-bottom:none}
+    .blog-card{
+      display:grid;grid-template-columns:4px 1fr;gap:0 .85rem;
+      padding:1.1rem 0;text-decoration:none;color:inherit;cursor:pointer;
+    }
+    .blog-card-stripe{background:var(--accent);flex-shrink:0;align-self:stretch;min-height:100%}
+    .blog-card-meta{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;margin-bottom:.3rem}
+    .blog-card-domain{font-family:'Space Mono',monospace;font-size:.52rem;letter-spacing:.06em;color:var(--faint);text-transform:lowercase}
+    .blog-card-date{font-family:'Space Mono',monospace;font-size:.52rem;color:var(--faint)}
     .blog-card-dot{width:3px;height:3px;border-radius:50%;background:var(--faint);opacity:.5}
     .blog-card-title{
-      font-family:'Gochi Hand',cursive;font-size:1.2rem;line-height:1.25;
-      color:var(--ink);margin-bottom:.35rem;transition:color .15s;
+      font-family:'Pixelify Sans',monospace;font-size:.88rem;font-weight:700;line-height:1.3;
+      color:var(--ink);margin-bottom:.3rem;transition:color .15s;
     }
     .blog-card:hover .blog-card-title{color:var(--accent)}
     .blog-card-excerpt{
-      font-size:.78rem;font-style:italic;color:var(--muted);line-height:1.55;
-      /* -webkit-line-clamp: still required for Firefox + older Safari.
-         The dev-tools warning is expected - leave as-is. */
+      font-size:.75rem;font-style:italic;color:var(--muted);line-height:1.5;
       display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;
       line-clamp:2;overflow:hidden;
     }
     .blog-card-read{
-      display:inline-block;margin-top:.45rem;
-      font-family:'Space Mono',monospace;font-size:.58rem;letter-spacing:.08em;
+      display:inline-block;margin-top:.4rem;
+      font-family:'Space Mono',monospace;font-size:.55rem;letter-spacing:.08em;
       text-transform:uppercase;color:var(--accent2);transition:color .15s;
     }
     .blog-card:hover .blog-card-read{color:var(--glow)}
 
-    /* video embed — 16:9 iframe with click overlay */
+    /* video embed */
     .blog-card-video-wrap{
       position:relative;width:100%;margin:.5rem 0 .4rem;
-      border-radius:4px;overflow:hidden;background:#000;aspect-ratio:16/9;
+      overflow:hidden;background:#000;aspect-ratio:16/9;
     }
     .blog-card-video-wrap iframe{
-      position:absolute;inset:0;width:100%;height:100%;
-      border:0;border-radius:4px;
+      position:absolute;inset:0;width:100%;height:100%;border:0;
+    }
+
+    /* ══════════════════════════════════════════════════════════
+       STATUS INDICATOR
+    ══════════════════════════════════════════════════════════ */
+    .status-badge{
+      display:inline-flex; align-items:center; gap:.35rem;
+      font-family:'Space Mono',monospace; font-size:.55rem;
+      letter-spacing:.05em;
+      padding:.12rem .42rem;
+      border:1px solid rgba(255,255,255,.25); border-radius:20px;
+      color:rgba(255,255,255,.85); background:rgba(0,0,0,.25);
+      /* sits between the title and win-buttons in the flex row */
+      margin-left:auto; flex-shrink:0;
+    }
+    .status-dot{
+      width:6px; height:6px; border-radius:50%;
+      flex-shrink:0;
+      background:#43b581;
+      box-shadow:0 0 5px #43b581;
+      transition:background .4s,box-shadow .4s;
+    }
+    .status-dot.idle    {background:#faa61a;box-shadow:0 0 5px #faa61a}
+    .status-dot.dnd     {background:#f04747;box-shadow:0 0 5px #f04747}
+    .status-dot.offline {background:#747f8d;box-shadow:none}
+    .status-text{color:inherit}
+
+    /* ══════════════════════════════════════════════════════════
+       COMMIT HISTORY CARD
+    ══════════════════════════════════════════════════════════ */
+    /* strip card-body padding so scroll fills edge-to-edge */
+    .commit-card-body{padding:0!important}
+    .commit-scroll{
+      /* fixed height — card will NEVER grow when commits load */
+      height:140px;
+      overflow-y:auto;
+      overflow-x:hidden;
+      scrollbar-width:thin;
+      scrollbar-color:var(--faint) transparent;
+      /* padding lives here, not on .card-body */
+      padding:.6rem .9rem;
+      box-sizing:border-box;
+      width:100%;
+    }
+    .commit-scroll::-webkit-scrollbar{width:4px;display:block}
+    .commit-scroll::-webkit-scrollbar-thumb{background:var(--faint);border-radius:0}
+    .commit-list{list-style:none;display:flex;flex-direction:column;gap:.3rem}
+    .commit-item{
+      font-family:'Space Mono',monospace;font-size:.55rem;color:var(--muted);
+      line-height:1.45;display:flex;flex-direction:column;gap:.1rem;
+      border-left:2px solid var(--faint);padding-left:.5rem;
+    }
+    .commit-item:hover{border-left-color:var(--glow)}
+    .commit-msg{color:var(--ink);font-size:.6rem}
+    .commit-date{color:var(--faint);font-size:.5rem;letter-spacing:.04em}
+    .commit-loading{
+      font-family:'Space Mono',monospace;font-size:.6rem;
+      color:var(--faint);text-align:center;padding:.5rem 0;
     }
 
     /* ══════════════════════════════════════════════════════════
@@ -1006,13 +1147,12 @@ enjoy the mess that is this code, ig
 
 <!-- HEADER -->
 <header class="site-header">
-  <p class="eyebrow">perpetually unfinished</p>
   <h1 class="site-title">
     <div class="neon-sign-wrap" id="neonSignWrap">
       <span class="neon-main" id="neonMain" data-text="shuuino">shuuino</span><span class="neon-suffix" id="neonSuffix" data-text=".party">.party</span>
     </div>
   </h1>
-  <p class="site-sub">"6 7 or something"</p>
+  <p class="eyebrow">"forever broken on mobile"</p>
   <p class="perf-notice">⚠ low performance mode - animations disabled</p>
   <button class="perf-toggle" id="perfToggle" aria-pressed="false" title="Toggle low performance mode">
     <span class="pt-dot"></span>
@@ -1031,8 +1171,9 @@ enjoy the mess that is this code, ig
     <div class="item item--wide">
       <div class="item-content">
         <div class="item-clip">
-          <div class="card-handle"><span>❧ about me</span><span class="drag-dots">⠿</span></div>
-          <div class="card-body">
+          <div class="card-handle"><span>❧ about me<span class="status-badge" id="statusBadge"><span class="status-dot" id="statusDot"></span><span class="status-text" id="statusText">…</span></span></span><div class="card-win-btns"><span class="card-win-btn">─</span><span class="card-win-btn">□</span><span class="card-win-btn win-close">×</span></div></div>
+          
+            <div class="card-body">
             <p class="bio-text">
               Hey, I'm <em>shuuino</em> - cs student (self-taught webdev though!), online 'activist' & aspiring cybersec specialist. This is a website I made in my free time to share stuff I find interesting online. <br><br>
               This site is a perpetual work in progress, so expect things to be broken or missing - I'm still learning and experimenting with new features and designs, and I have a long list of things I want to add but haven't gotten around to yet. <br><br>
@@ -1052,10 +1193,10 @@ enjoy the mess that is this code, ig
     <div class="item item--accent">
       <div class="item-content">
         <div class="item-clip">
-          <div class="card-handle"><span>♫ now playing</span><span class="drag-dots">⠿</span></div>
+          <div class="card-handle"><span>♫ now playing</span><div class="card-win-btns"><span class="card-win-btn">─</span><span class="card-win-btn">□</span><span class="card-win-btn win-close">×</span></div></div>
           <div class="card-body" id="musicPlayer">
-            <div class="music-track-title" id="trackTitle">Cali man (extended intro)</div>
-            <div class="music-artist" id="trackArtist">EsDeeKid, Rico Ace</div>
+            <div class="music-track-title" id="trackTitle"></div>
+            <div class="music-artist" id="trackArtist"></div>
             <div class="music-bars">
               <span></span><span></span><span></span><span></span><span></span> <!--each span is an animated bar, yes shit solution lmfao but it's temporary anyways-->
             </div>
@@ -1088,7 +1229,7 @@ enjoy the mess that is this code, ig
     <div class="item">
       <div class="item-content">
         <div class="item-clip">
-          <div class="card-handle"><span>◉ find me</span><span class="drag-dots">⠿</span></div>
+          <div class="card-handle"><span>◉ find me</span><div class="card-win-btns"><span class="card-win-btn">─</span><span class="card-win-btn">□</span><span class="card-win-btn win-close">×</span></div></div>
           <div class="card-body">
             <ul class="social-list">
               <li class="social-item">
@@ -1151,7 +1292,7 @@ enjoy the mess that is this code, ig
     <div class="item">
       <div class="item-content">
         <div class="item-clip">
-          <div class="card-handle"><span>⛅ weather · france</span><span class="drag-dots">⠿</span></div>
+          <div class="card-handle"><span>⛅ weather</span><div class="card-win-btns"><span class="card-win-btn">─</span><span class="card-win-btn">□</span><span class="card-win-btn win-close">×</span></div></div>
           <div class="card-body">
             <div class="weather-inner" id="weatherInner">
               <p class="weather-location">France</p>
@@ -1166,10 +1307,9 @@ enjoy the mess that is this code, ig
     <div class="item">
       <div class="item-content">
         <div class="item-clip">
-          <div class="card-handle"><span>⇢ friend links</span><span class="drag-dots">⠿</span></div>
+          <div class="card-handle"><span>⇢ friend links</span><div class="card-win-btns"><span class="card-win-btn">─</span><span class="card-win-btn">□</span><span class="card-win-btn win-close">×</span></div></div>
           <div class="card-body">
             <div class="eighty-eight-grid">
-              <p class="btn88-label">friends</p>
               <!--<div class="btn88-row">
                 <div class="btn88">empty slot</div>
                 <div class="btn88">empty slot</div>
@@ -1186,7 +1326,7 @@ enjoy the mess that is this code, ig
     <div class="item">
       <div class="item-content">
         <div class="item-clip">
-          <div class="card-handle"><span>✉ suggestions</span><span class="drag-dots">⠿</span></div>
+          <div class="card-handle"><span>✉ suggestions</span><div class="card-win-btns"><span class="card-win-btn">─</span><span class="card-win-btn">□</span><span class="card-win-btn win-close">×</span></div></div>
           <div class="card-body">
             <div class="dm-inner">
               <div class="dm-icon">💌</div>
@@ -1206,7 +1346,7 @@ enjoy the mess that is this code, ig
     <div class="item">
       <div class="item-content">
         <div class="item-clip">
-          <div class="card-handle"><span>◎ visitors</span><span class="drag-dots">⠿</span></div>
+          <div class="card-handle"><span>◎ visitors</span><div class="card-win-btns"><span class="card-win-btn">─</span><span class="card-win-btn">□</span><span class="card-win-btn win-close">×</span></div></div>
           <div class="card-body" style="padding:.5rem .9rem;">
             <!-- getloli badge: fixed 100px height, width scales to fit card -->
             <div style="overflow:hidden;width:100%;">
@@ -1226,7 +1366,7 @@ enjoy the mess that is this code, ig
     <div class="item">
       <div class="item-content">
         <div class="item-clip">
-          <div class="card-handle"><span>◈ my 88×31</span><span class="drag-dots">⠿</span></div>
+          <div class="card-handle"><span>◈ my 88×31</span><div class="card-win-btns"><span class="card-win-btn">─</span><span class="card-win-btn">□</span><span class="card-win-btn win-close">×</span></div></div>
           <div class="card-body">
             <div style="display:flex;align-items:center;gap:.6rem;margin-bottom:.3rem;">
               <a href="#" class="my-btn88" title="shuuino.party"><img src="shuuino-88x31.gif"></a>
@@ -1244,7 +1384,7 @@ enjoy the mess that is this code, ig
     <div class="item">
       <div class="item-content">
         <div class="item-clip">
-          <div class="card-handle"><span>◈ version</span><span class="drag-dots">⠿</span></div>
+          <div class="card-handle"><span>◈ version</span><div class="card-win-btns"><span class="card-win-btn">─</span><span class="card-win-btn">□</span><span class="card-win-btn win-close">×</span></div></div>
           <div class="card-body">
             <p class="version-label">current version</p>
             <p class="version-num">3.1.3</p>
@@ -1253,11 +1393,26 @@ enjoy the mess that is this code, ig
       </div>
     </div>
 
-    <!-- NEXT RELEASE -->
+    <!-- SITE UPDATES -->
     <div class="item">
       <div class="item-content">
         <div class="item-clip">
-          <div class="card-handle"><span>📋 next release</span><span class="drag-dots">⠿</span></div>
+          <div class="card-handle"><span>⟳ site updates</span><div class="card-win-btns"><span class="card-win-btn">─</span><span class="card-win-btn">□</span><span class="card-win-btn win-close">×</span></div></div>
+          <div class="card-body commit-card-body">
+            <div class="commit-scroll" id="commitScroll">
+              <p class="commit-loading" id="commitLoading">loading…</p>
+              <ul class="commit-list" id="commitList" style="display:none"></ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TODO -->
+    <div class="item">
+      <div class="item-content">
+        <div class="item-clip">
+          <div class="card-handle"><span>📋 todo</span><div class="card-win-btns"><span class="card-win-btn">─</span><span class="card-win-btn">□</span><span class="card-win-btn win-close">×</span></div></div>
           <div class="card-body">
             <div class="changelog-scroll">
               <ul class="changelog-list">
@@ -1277,12 +1432,15 @@ enjoy the mess that is this code, ig
   </div><!-- /#grid -->
 </section>
 
-<hr class="divider" />
+<div class="divider" aria-hidden="true">✦ · · ✦ · · ✦</div>
 
 <!-- CAMPAIGN STRIP -->
 <div class="campaign-strip reveal">
-  <p class="campaign-strip-label">◈ stuff worth paying attention to</p>
-  <div class="campaign-links">
+  <p class="campaign-strip-label">
+    <span>◈ stuff worth paying attention to</span>
+  </p>
+  <div class="campaign-strip-inner">
+    <div class="campaign-links">
     <a class="campaign-link cl-android" href="https://keepandroidopen.org/" target="_blank" rel="noopener">
       <span class="cl-icon">🤖</span>
       <span>
@@ -1312,7 +1470,8 @@ enjoy the mess that is this code, ig
         <span class="cl-desc">against mass surveillance of private messages in the EU</span>
       </span>
     </a>
-  </div>
+  </div><!-- /.campaign-links -->
+  </div><!-- /.campaign-strip-inner -->
 </div>
 
 <!--
@@ -1335,7 +1494,10 @@ enjoy the mess that is this code, ig
   ═══════════════════════════════════════════════════════
 -->
 <section class="blog-section">
-  <p class="section-label">◈ from the blog</p>
+  <div class="blog-section-titlebar">
+    <span>◈ from the blog</span>
+  </div>
+  <div class="blog-section-inner">
 
   <!-- POST 1 - march 20 2026, YouTube video -->
   <article class="blog-post reveal">
@@ -1390,9 +1552,10 @@ enjoy the mess that is this code, ig
     </a>
   </article>
 
-  <div style="text-align:center">
+  <div style="text-align:center;padding:.75rem 0 .25rem;position:relative;z-index:1">
     <a href="./blog.html" class="blog-all-btn">all posts →</a>
   </div>
+  </div><!-- /.blog-section-inner -->
 </section>
 
 <!-- FOOTER -->
@@ -1454,7 +1617,7 @@ enjoy the mess that is this code, ig
  *     window.isBrave = brave;
  *     if(brave){
  *       document.documentElement.classList.add('brave-mode');
- *       /* shooting stars + twinkle hidden via CSS brave-mode rules
+ *       // shooting stars + twinkle hidden via CSS brave-mode rules
  *     }
  *   });
  * }
@@ -1839,6 +2002,80 @@ window.initParticles();
 /* visitor counter: handled by count.getloli.com badge in HTML */
 
 /* ════════════════════════════════════════════════════════════
+   LANYARD STATUS
+   Fetches Discord presence from api.lanyard.rest and shows
+   online/idle/dnd/offline dot + label in the header.
+════════════════════════════════════════════════════════════ */
+(function(){
+  var dot  = document.getElementById('statusDot');
+  var text = document.getElementById('statusText');
+  if(!dot || !text) return;
+
+  var LABELS = {online:'online', idle:'idle', dnd:'do not disturb', offline:'offline'};
+
+  function apply(status){
+    dot.className  = 'status-dot ' + status;
+    text.textContent = LABELS[status] || 'offline';
+  }
+
+  fetch('https://api.lanyard.rest/v1/users/513185364865843207')
+    .then(function(r){ return r.json(); })
+    .then(function(d){
+      if(!d.success) { apply('offline'); return; }
+      apply(d.data.discord_status || 'offline');
+    })
+    .catch(function(){ apply('offline'); });
+})();
+
+/* ════════════════════════════════════════════════════════════
+   GITHUB COMMITS
+   Fetches recent commits from the shuuino/shuuino.party repo
+   and displays them in the site updates card with dates.
+════════════════════════════════════════════════════════════ */
+(function(){
+  var loading = document.getElementById('commitLoading');
+  var list    = document.getElementById('commitList');
+  if(!loading || !list) return;
+
+  fetch('https://api.github.com/repos/shuuino/shuuino.party/commits?per_page=15')
+    .then(function(r){ return r.json(); })
+    .then(function(commits){
+      if(!Array.isArray(commits) || commits.length === 0){
+        loading.textContent = 'no commits found';
+        if(typeof window.grid!=='undefined') window.grid.refreshItems().layout();
+        return;
+      }
+      loading.style.display = 'none';
+      list.style.display = '';
+      commits.forEach(function(c){
+        var msg  = c.commit.message.split('\n')[0]; /* first line only */
+        var date = new Date(c.commit.author.date);
+        var dateStr = date.toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'}).toLowerCase();
+
+        var li   = document.createElement('li');
+        li.className = 'commit-item';
+
+        var msgEl  = document.createElement('span');
+        msgEl.className = 'commit-msg';
+        msgEl.textContent = msg;
+
+        var dateEl = document.createElement('span');
+        dateEl.className = 'commit-date';
+        dateEl.textContent = dateStr;
+
+        li.appendChild(msgEl);
+        li.appendChild(dateEl);
+        list.appendChild(li);
+      });
+      if(typeof window.grid!=='undefined') window.grid.refreshItems().layout();
+    })
+    .catch(function(){
+      loading.textContent = 'could not load updates :(';
+      if(typeof window.grid!=='undefined') window.grid.refreshItems().layout();
+    });
+})();
+
+/* ════════════════════════════════════════════════════════════
    WEATHER - Open-Meteo, France
 ════════════════════════════════════════════════════════════ */
 (function(){
@@ -1893,7 +2130,7 @@ var grid=new Muuri('#grid',{
 grid.on('dragStart',function(item){
   var c=item.getElement().querySelector('.item-content');
   c.style.transform='rotate(1.5deg) scale(1.03)';
-  c.style.boxShadow='0 8px 40px rgba(160,60,255,.5),0 0 0 1px rgba(200,120,255,.4)';
+  c.style.boxShadow='6px 6px 0 rgba(150,80,255,.4),0 0 30px rgba(160,60,255,.45),0 0 0 2px rgba(200,120,255,.5)';
 });
 grid.on('dragEnd',function(item){
   var c=item.getElement().querySelector('.item-content');
