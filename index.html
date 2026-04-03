@@ -1080,12 +1080,22 @@ enjoy the mess that is this code, ig
     html.brave-mode .site-nav a{opacity:1!important}
 
     /* ══════════════════════════════════════════════════════════
-       RESPONSIVE
+       RESPONSIVE SHIT
     ══════════════════════════════════════════════════════════ */
+    /*
+      normal card width: 220px
+      if we can't fit two cards side-by-side, we just extend their width to the screen's width - some padding & margin
+    */
+    @media(max-width:488px){
+      :root{
+        --col: min(calc(100vw - 3rem), 440px);
+      }
+      /* psure i have some sort of other css thing that means i dont need this like but idk its like 2am i cba rn */
+      .item--wide{ width: var(--col); }
+    }
+
     @media(max-width:540px){
       html{font-size:16px}
-      :root{--col:155px;--gap:7px}
-      .item--wide{width:calc(var(--col)*2 + var(--gap)*2)}
       .footer-gif{height:calc(100% - .75rem);left:.5rem}
     }
     @media(max-width:400px){
@@ -1150,7 +1160,7 @@ enjoy the mess that is this code, ig
       <span class="neon-main" id="neonMain" data-text="shuuino">shuuino</span><span class="neon-suffix" id="neonSuffix" data-text=".party">.party</span>
     </div>
   </h1>
-  <p class="eyebrow">"forever broken on mobile"</p>
+  <p class="eyebrow">"forever broken on brave browser"</p>
   <p class="perf-notice">⚠ low performance mode - animations disabled</p>
   <button class="perf-toggle" id="perfToggle" aria-pressed="false" title="Toggle low performance mode">
     <span class="pt-dot"></span>
@@ -1385,7 +1395,7 @@ enjoy the mess that is this code, ig
           <div class="card-handle"><span>◈ version</span><div class="card-win-btns"><span class="card-win-btn">─</span><span class="card-win-btn">□</span><span class="card-win-btn win-close">×</span></div></div>
           <div class="card-body">
             <p class="version-label">current version</p>
-            <p class="version-num">3.1.7</p>
+            <p class="version-num">3.1.8</p>
           </div>
         </div>
       </div>
@@ -2168,6 +2178,15 @@ grid.on('layoutEnd',function(items){
 });
 
 window.grid=grid;
+
+/* muuri grid checks item widths at DOM breakpoint, doesn't auto-update on its own, so this is required */
+var resizeTimer;
+window.addEventListener('resize', function(){
+  clearTimeout(resizeTimer);
+  resizeTimer = setTimeout(function(){
+    grid.refreshItems().layout();
+  }, 100);
+});
 
 /* re-layout after fonts load to fix FOUT height miscalculations */
 if(document.fonts && document.fonts.ready){
