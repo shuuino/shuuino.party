@@ -2,11 +2,27 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>shuuino.party — reposts</title>
-    <link>https://shuuino.party/</link>
+    <link>https://shuuino.party/repost</link>
     <description>links, articles, and videos i find interesting</description>
     <language>en</language>
-    <lastBuildDate>Sat, 28 Mar 2026 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 10 Apr 2026 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://shuuino.party/feed.xml" rel="self" type="application/rss+xml"/>
+
+    <item>
+      <title>France Launches Government Linux Desktop Plan as Windows Exit Begins</title>
+      <link>https://linuxiac.com/france-launches-government-linux-desktop-plan-as-windows-exit-begins/</link>
+      <guid isPermaLink="true">https://linuxiac.com/france-launches-government-linux-desktop-plan-as-windows-exit-begins/</guid>
+      <pubDate>Thu, 9 Apr 2026 00:00:00 +0000</pubDate>
+      <description>France is transitioning government desktops to Linux, with each ministry required to formalize its implementation plan by autumn 2026.</description>
+    </item>
+
+    <item>
+      <title>Assessing Claude Mythos Preview’s cybersecurity capabilities</title>
+      <link>https://red.anthropic.com/2026/mythos-preview/</link>
+      <guid isPermaLink="true">https://red.anthropic.com/2026/mythos-preview/</guid>
+      <pubDate>Tue, 7 Apr 2026 00:00:00 +0000</pubDate>
+      <description>From the anthropic read team.</description>
+    </item>
 
     <item>
       <title>I Decompiled the White House's New App</title>
@@ -14,6 +30,14 @@
       <guid isPermaLink="true">https://blog.thereallo.dev/blog/decompiling-the-white-house-app</guid>
       <pubDate>Sat, 28 Mar 2026 00:00:00 +0000</pubDate>
       <description>The official White House Android app has a cookie/paywall bypass injector, tracks your GPS every 4.5 minutes, and loads JavaScript from some guy's GitHub Pages.</description>
+    </item>
+
+    <item>
+      <title>Regarding the Morphe DMCA</title>
+      <link>https://www.reddit.com/r/MorpheApp/comments/1s3w1er/regarding_the_morphe_dmca/</link>
+      <guid isPermaLink="true">https://www.reddit.com/r/MorpheApp/comments/1s3w1er/regarding_the_morphe_dmca/</guid>
+      <pubDate>Thu, 26 Mar 2026 00:00:00 +0000</pubDate>
+      <description>ReVanced has been stealing code from Morphe without credit. Open source is generally free for others to use, but open source does not mean "can use without restrictions". There still are requirements to use open source code, and ReVanced is not following them.</description>
     </item>
 
     <item>
@@ -73,6 +97,14 @@
     </item>
 
     <item>
+      <title>Exploiting Silent Delivery Receipts to Monitor Users on Mobile Instant Messengers</title>
+      <link>https://arxiv.org/pdf/2411.11194</link>
+      <guid isPermaLink="true">https://arxiv.org/pdf/2411.11194</guid>
+      <pubDate>Fri, 31 Oct 2025 00:00:00 +0000</pubDate>
+      <description>fingerprinting TTP via WhatsApp and Signal to find out when someone is active, at work, at home, etc</description>
+    </item>
+
+    <item>
       <title>EU Develops Independent Payment System to Reduce Reliance on Global Providers</title>
       <link>https://mobileidworld.com/eu-develops-independent-payment-system-to-reduce-reliance-on-global-providers/</link>
       <guid isPermaLink="true">https://mobileidworld.com/eu-develops-independent-payment-system-to-reduce-reliance-on-global-providers/</guid>
@@ -86,6 +118,14 @@
       <guid isPermaLink="true">https://gist.github.com/hackermondev/45a3cdfa52246f1d1201c1e8cdef6117</guid>
       <pubDate>Tue, 21 Jan 2025 00:00:00 +0000</pubDate>
       <description>A teenager discovers a significant security flaw in a widely-used service through methodical, independent research — a good reminder that age isn't a barrier to serious security work.</description>
+    </item>
+
+    <item>
+      <title>Curtailing the Cookie Monster through Data Protection by Default</title>
+      <link>https://tilburglawreview.com/articles/10.5334/tilr.311</link>
+      <guid isPermaLink="true">https://tilburglawreview.com/articles/10.5334/tilr.311</guid>
+      <pubDate>Fri, 17 Feb 2023 00:00:00 +0000</pubDate>
+      <description>The EU law that has led to the rise of cookie banner popups is flawed. It's time for a fix.</description>
     </item>
 
   </channel>
