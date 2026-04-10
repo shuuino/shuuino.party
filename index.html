@@ -1,5 +1,5 @@
 <!--
-All css, javascript & html is in the same file, because (in theory) it means one request so a faster website (tfw too lazy to seperate it), but I haven't actually gotten to measure the difference yet.
+All css, javascript & html is in the same file because im too lazy to seperate it <3
 enjoy the mess that is this code, ig
 -->
 
@@ -163,7 +163,7 @@ enjoy the mess that is this code, ig
       animation-delay:var(--shoot-delay,0s);
     }
 
-    /* low-perf: freeze twinkle to static dots, hide shooting stars */
+    /* low-perf: freeze twinkle for static dots, hide shooting stars */
     html.low-perf .star.animated{animation:none!important}
     html.low-perf .shooting{display:none!important}
 
@@ -172,7 +172,6 @@ enjoy the mess that is this code, ig
     ::selection{background:rgba(176,107,255,.35)}
     a{color:var(--accent2);transition:color .15s}
     a:hover{color:var(--glow)}
-    /* inline prose links get an underline so they read as links */
     .bio-text a{text-decoration:underline dotted;color:var(--accent2)}
     .bio-text a:hover{color:var(--glow)}
     img{max-width:100%;display:block}
@@ -183,7 +182,7 @@ enjoy the mess that is this code, ig
       scrollbar-width: none; /* firefox */
       width: 0; /*anything else ig*/
     }
-    /* commented out in case
+    /* commented out in case i revert hidden scrollbar
     ::-webkit-scrollbar-track{background:var(--bg)}
     ::-webkit-scrollbar-thumb{background:var(--glow2);border-radius:3px}
     */
@@ -308,7 +307,6 @@ enjoy the mess that is this code, ig
       vertical-align: baseline;
       position: relative;
       z-index: 1;
-      /* slight delay so suffix flickers just after the main text */
       animation: neon-flicker 2.2s ease 0.12s forwards;
       opacity: 0;
     }
@@ -337,7 +335,7 @@ enjoy the mess that is this code, ig
       -webkit-text-stroke-color: var(--ns-outline-on) !important;
       animation: none !important;
     }
-    /* low-perf: skip straight to lit, no animation at all */
+    /* low-perf: skip straight to lit */
     html.low-perf .neon-main,
     html.low-perf .neon-suffix {
       color: var(--ns-color-on) !important;
@@ -375,9 +373,6 @@ enjoy the mess that is this code, ig
 
     /* ══════════════════════════════════════════════════════════
        MUURI GRID
-       CLS fix: min-height pre-reserves space so Muuri's
-       post-JS height write doesn't shift content below.
-       contain:layout stops internal shifts propagating out.
     ══════════════════════════════════════════════════════════ */
     .grid-section{
       padding:2.2rem 1.5rem 2.8rem; max-width:1320px; margin:0 auto; min-width: none;
@@ -528,7 +523,6 @@ enjoy the mess that is this code, ig
     .music-track-title{
       font-family:'Gochi Hand',cursive; font-size:1.15rem; margin-bottom:.15rem;
       color:#f0b0ff; text-shadow:0 0 14px rgba(240,100,255,.5);
-      /* clamp long titles to one line so card height stays fixed */
       white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:100%;
     }
     .music-artist{font-family:'Space Mono',monospace;font-size:.68rem;color:rgba(220,210,255,.65);margin-bottom:.55rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
@@ -669,7 +663,7 @@ enjoy the mess that is this code, ig
       margin-top:.5rem;
       background:rgba(0,0,0,.45);border:1px solid rgba(150,80,255,.2);
       border-radius:6px;padding:.55rem .6rem;
-      padding-bottom:2rem; /* room for the button at bottom */
+      padding-bottom:2rem; 
       font-family:'Space Mono',monospace;font-size:.52rem;
       color:rgba(180,160,210,.7);line-height:1.5;
       overflow-x:auto;white-space:nowrap;
@@ -679,7 +673,6 @@ enjoy the mess that is this code, ig
       font-size:.5rem;letter-spacing:.08em;text-transform:uppercase;
       color:rgba(150,100,200,.6);white-space:nowrap;
     }
-    /* blue button in bottom-right of code box, matching screenshot */
     .copy-btn{
       position:absolute;bottom:.4rem;right:.4rem;
       background:#2563eb;border:none;border-radius:4px;
@@ -692,6 +685,53 @@ enjoy the mess that is this code, ig
     .copy-btn:hover{background:#1d4ed8;transform:translateY(-1px)}
     .copy-btn:active{transform:translateY(0)}
     .copy-btn.copied{background:#16a34a}
+
+    /* ══════════════════════════════════════════════════════════
+       GIF CARD
+    ══════════════════════════════════════════════════════════ */
+    .item--gif {
+      --gif-size:      160%;
+      --gif-offset-x:  0%;
+      --gif-offset-y: -7%;
+    }
+    .item--gif .item-content {
+      overflow: visible;
+      background: var(--card-bg);
+    }
+    .item--gif .item-content::before {
+      overflow: hidden;
+    }
+    .item--gif .gif-card-inner {
+      position: relative;
+      height: 150px;
+      overflow: visible;
+      cursor: grab;
+      user-select: none;
+    }
+    .item--gif .item-content::after { z-index: -1; }
+    .item--gif .item-content::before { z-index: -1; }
+    .item--gif .gif-card-inner:active { cursor: grabbing; }
+    .item--gif .card-handle { cursor: grab; }
+    .item--gif .card-handle:active { cursor: grabbing; }
+    .item--gif .gif-img {
+      position: absolute;
+      z-index: 2;
+      width: var(--gif-size);
+      max-width: none;      
+      height: auto;
+      left: 50%;
+      top:  50%;
+      
+      transform:
+        translateX(-50%)
+        translateY(-50%)
+        translateX(var(--gif-offset-x))
+        translateY(var(--gif-offset-y));
+      pointer-events: none;
+      user-select: none;
+      -webkit-user-drag: none;
+      image-rendering: pixelated;
+    }
 
     /* ══════════════════════════════════════════════════════════
       WEATHER CARD -this shit broke so often it pissed me off sm, for all i know it's still partly broken rn
@@ -801,7 +841,6 @@ enjoy the mess that is this code, ig
       font-family:'Pixelify Sans',monospace;font-size:.72rem;letter-spacing:.1em;
       text-transform:uppercase;color:#fff;margin-bottom:0;
       display:flex;align-items:center;justify-content:space-between;
-      /* titlebar gradient */
       background:linear-gradient(90deg,var(--glow2),var(--glow),var(--glow3));
       padding:.35rem .65rem;
       border-bottom:2px solid var(--glow2);
@@ -822,7 +861,6 @@ enjoy the mess that is this code, ig
       border-top:none;
       background:var(--card-bg);
       padding:.75rem;
-      /* subtle inset dashed detail */
       position:relative;
     }
     .campaign-strip-inner::before{
@@ -917,7 +955,6 @@ enjoy the mess that is this code, ig
     }
     .repost-card:hover .repost-card-read{color:var(--glow)}
 
-    /* video embed */
     .repost-card-video-wrap{
       position:relative;width:100%;margin:.5rem 0 .4rem;
       overflow:hidden;background:#000;aspect-ratio:16/9;
@@ -936,7 +973,6 @@ enjoy the mess that is this code, ig
       padding:.12rem .42rem;
       border:1px solid rgba(255,255,255,.25); border-radius:20px;
       color:rgba(255,255,255,.85); background:rgba(0,0,0,.25);
-      /* sits between the title and win-buttons in the flex row */
       margin-left:auto; flex-shrink:0;
     }
     .status-dot{
@@ -954,16 +990,13 @@ enjoy the mess that is this code, ig
     /* ══════════════════════════════════════════════════════════
        COMMIT HISTORY CARD
     ══════════════════════════════════════════════════════════ */
-    /* strip card-body padding so scroll fills edge-to-edge */
     .commit-card-body{padding:0!important}
     .commit-scroll{
-      /* fixed height — card will NEVER grow when commits load */
       height:140px;
       overflow-y:auto;
       overflow-x:hidden;
       scrollbar-width:thin;
       scrollbar-color:var(--faint) transparent;
-      /* padding lives here, not on .card-body */
       padding:.6rem .9rem;
       box-sizing:border-box;
       width:100%;
@@ -1011,12 +1044,11 @@ enjoy the mess that is this code, ig
     .footer-links a:hover{color:var(--accent)}
     footer p{font-size:.58rem;opacity:.4;margin-top:.15rem}
 
-    /* Shiggy <3 >*/
     .footer-gif{
       position:absolute;
-      top:48%; left:.75rem;
-      transform:translateY(-50%);
-      height:calc(100% - 1rem);
+      top:50%; right:-0.75rem;
+      transform:translateY(-53%);
+      height:160%;
       width:auto;
       image-rendering:pixelated;
       pointer-events:none;
@@ -1092,6 +1124,7 @@ enjoy the mess that is this code, ig
       }
       /* psure i have some sort of other css thing that means i dont need this like but idk its like 2am i cba rn */
       .item--wide{ width: var(--col); }
+      .item--gif { display: none; }
     }
 
     @media(max-width:540px){
@@ -1207,6 +1240,7 @@ enjoy the mess that is this code, ig
             <div class="music-artist" id="trackArtist"></div>
             <div class="music-bars">
               <span></span><span></span><span></span><span></span><span></span> <!--each span is an animated bar, yes shit solution lmfao but it's temporary anyways-->
+              <!-- its been two weeks why am i still using this, temporary my ass-->
             </div>
             <div class="music-progress-wrap">
               <div class="music-progress-track" id="progressTrack">
@@ -1267,7 +1301,6 @@ enjoy the mess that is this code, ig
               <li class="social-item disabled" id="matrixItem" title="on demand only">
                 <span class="social-inner">
                   <svg class="social-icon" viewBox="0 0 16 16" fill="currentColor" style="color:#888">
-                    <!-- Matrix [m] logo: outer brackets + M letterform -->
                     <path d="M0 0h1.5v16H0zm14.5 0H16v16h-1.5z"/>
                     <path d="M4 4.5v7h1.25V7.2l2.25 3.3 2.25-3.3v4.3H11v-7H9.75L7.5 8.5 5.25 4.5z"/>
                   </svg>
@@ -1292,6 +1325,16 @@ enjoy the mess that is this code, ig
               </li>
             </ul>
           </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- GIF CARD -->
+    <div class="item item--gif">
+      <div class="item-content">
+        <!-- card-handle on gif-card-inner = entire card surface is the drag handle -->
+        <div class="gif-card-inner card-handle">
+          <img class="gif-img" src="image1.gif" alt="idle gif" draggable="false" />
         </div>
       </div>
     </div>
@@ -1356,7 +1399,6 @@ enjoy the mess that is this code, ig
         <div class="item-clip">
           <div class="card-handle"><span>◎ visitors</span><div class="card-win-btns"><span class="card-win-btn">─</span><span class="card-win-btn">□</span><span class="card-win-btn win-close">×</span></div></div>
           <div class="card-body" style="padding:.5rem .9rem;">
-            <!-- getloli badge: fixed 100px height, width scales to fit card -->
             <div style="overflow:hidden;width:100%;">
               <img
                 src="https://count.getloli.com/@:shuuino?name=%3Ashuuino&theme=booru-lewd&padding=0&offset=0&align=top&scale=1&pixelated=1&darkmode=0"
@@ -1424,12 +1466,16 @@ enjoy the mess that is this code, ig
           <div class="card-body">
             <div class="changelog-scroll">
               <ul class="changelog-list">
+                <li class="changelog-item">fix muuri grid margin fuckup</li>
                 <li class="changelog-item">Preload song when hovering over forward button</li>
                 <li class="changelog-item">Preload repost page when hovering over repost button</li>
                 <li class="changelog-item">Preload articles when hovering "read more" (if possible)</li>
                 <li class="changelog-item">Change entire article being an &lt;a&gt; to just "read more"</li>
                 <li class="changelog-item">hopefully fix Brave browser compatibility</li>
                 <li class="changelog-item">add auto-update version number</li>
+                <li class="changelog-item">make a python script to make updating the reposts easier</li>
+                <li class="changelog-item">add 404, 403, 500 page gifs</li>
+                <li class="changelog-item">fix footer gif</li>
               </ul>
             </div>
           </div>
@@ -1464,7 +1510,6 @@ enjoy the mess that is this code, ig
       </span>
     </a>
     <a class="campaign-link cl-tbote" href="https://tboteproject.com/" target="_blank" rel="noopener">
-      <!-- 🔎 chosen for TBOTE: a research/investigation project -->
       <span class="cl-icon">🔎</span>
       <span>
         <span class="cl-name">TBOTE</span>
@@ -1578,8 +1623,8 @@ enjoy the mess that is this code, ig
   </div>
   <p style="margin-top:.15rem">feel free to take inspiration, but please don't copy wholesale</p>
   <img class="footer-gif"
-       src="https://media.tenor.com/qFjjshBkndkAAAAj/shiggy.gif"
-       alt="shiggy dancing" loading="lazy" />
+       src="image2.gif"
+       alt="idle animation gif" loading="lazy" />
 </footer>
 
 
@@ -1632,7 +1677,7 @@ enjoy the mess that is this code, ig
  * }
  * ════════════════════════════════════════════════════════════
  */
-window.isBrave = false; /* placeholder so initParticles check doesn't throw */
+window.isBrave = false; /* fuckass placeholder so initParticles check doesn't throw */
 
 /* ════════════════════════════════════════════════════════════
    LOW PERFORMANCE MODE
@@ -1675,11 +1720,9 @@ window.isBrave = false; /* placeholder so initParticles check doesn't throw */
   var isLowPerf = document.documentElement.classList.contains('low-perf');
 
   if(isLowPerf){
-    /* skip animation entirely — mark lit right away */
     main.classList.add('lit');
     suffix.classList.add('lit');
   } else {
-    /* flicker runs 2.2s + 0.12s suffix delay; add .lit just after both finish */
     setTimeout(function(){
       main.classList.add('lit');
       suffix.classList.add('lit');
@@ -1731,12 +1774,10 @@ window.initParticles = (function(){
     var isBraveMode=window.isBrave;
 
     var W=window.innerWidth, H=window.innerHeight;
-    /* scale star count with screen area, clamped */
     function calcN(){ return Math.max(60, Math.round(160*(W*H)/(1920*1080))); }
 
     function rand(a,b){ return a+Math.random()*(b-a); }
 
-    /* purple-tinted star colors matching site palette */
     var TINTS=['255,255,255','220,180,255','180,160,255','200,220,255'];
 
     function makeStar(){
@@ -1755,7 +1796,6 @@ window.initParticles = (function(){
       el.style.background='rgba('+tint+','+baseOpacity+')';
       el.style.setProperty('--star-base-opacity', baseOpacity);
 
-      /* only animate if not low-perf and not brave */
       if(!isLowPerf && !isBraveMode){
         el.classList.add('animated');
         var dur=rand(2,5);
@@ -1846,7 +1886,7 @@ window.initParticles();
 (function(){
   var revealEls=document.querySelectorAll('.reveal');
   if(!window.IntersectionObserver){
-    /* fallback for very old browsers */
+    /* fallback */
     for(var i=0;i<revealEls.length;i++) revealEls[i].classList.add('revealed');
     return;
   }
@@ -1867,6 +1907,7 @@ window.initParticles();
 
 /* ════════════════════════════════════════════════════════════
    MUSIC PLAYER
+   yeah this whole thing is fucked icl because i tried to make it autoplay but failed
 ════════════════════════════════════════════════════════════ */
 (function(){
   var tracks  = [
@@ -1891,7 +1932,7 @@ window.initParticles();
   audio.volume=0.8;
   /*convert seconds into minutes & seconds display format*/
   function fmt(s){s=Math.floor(s);return Math.floor(s/60)+':'+(s%60<10?'0':'')+s%60;}
-  /*UI updating for new track*/
+
   function loadTrack(i){
     idx=(i+tracks.length)%tracks.length;elapsed=0;
     titleEl.textContent=tracks[idx].title;
@@ -1902,12 +1943,12 @@ window.initParticles();
     audio.src='./songs/'+encodeURIComponent(tracks[idx].title)+'.mp3';
     audio.load();
   }
-  /*UI updating for play / pause button presses*/
+
   function setPlayIcon(on){
     if(on){playIcon.className='pause-icon';playIcon.innerHTML='<span></span><span></span>';}
     else  {playIcon.className='play-icon';playIcon.innerHTML='';}
   }
-  /*UI updating for playthrough (so once a second)*/
+
   function tick(ts){
     if(!lastTs) lastTs=ts;
     elapsed=audio.paused?elapsed+(ts-lastTs)/1000:audio.currentTime;
@@ -1918,13 +1959,13 @@ window.initParticles();
     timeEl.textContent=fmt(elapsed);
     rafId=requestAnimationFrame(tick);
   }
-  /*music player function, loads & plays the songs*/
+
   function setPlaying(on){
     setPlayIcon(on);
     if(on){
       player.classList.remove('paused');
       lastTs=null;
-      audio.play().catch(function(){}); /* silently fail if browser blocks autoplay */
+      audio.play().catch(function(){});
       rafId=requestAnimationFrame(tick);
     } else {
       player.classList.add('paused');
@@ -1933,33 +1974,33 @@ window.initParticles();
       fill.style.transition='none';
     }
   }
-  /* called by the loader when dismissed — play immediately */
+
   window.startFirstSong=function(){
     audio.currentTime=0;
     elapsed=0;
     setPlaying(true);
   };
-  /*song finish trigger*/
+
   audio.addEventListener('ended',function(){
     loadTrack((idx+1)%tracks.length);
     setPlaying(true);
   });
   loadTrack(0);
   setPlayIcon(false);
-  /*play / pause button clicked trigger*/
+
   playBtn.addEventListener('click',function(){
     if(audio.paused) setPlaying(true);
     else setPlaying(false);
   });
-  /*previous song button trigger*/
+
   document.getElementById('prevBtn').addEventListener('click',function(){
     loadTrack(idx-1);setPlaying(true);
   });
-  /*next song button trigger*/
+
   document.getElementById('nextBtn').addEventListener('click',function(){
     loadTrack(idx+1);setPlaying(true);
   });
-  /*slider adjustement trigger*/
+
   volSlider.addEventListener('input',function(){
     audio.volume=volSlider.value/100;
   });
@@ -1997,7 +2038,7 @@ window.initParticles();
         setTimeout(function(){btn.textContent='Copy';btn.classList.remove('copied');},2000);
       });
     } else {
-      /* fallback for HTTP contexts */
+      /* fallback for HTTP contexts, will delete this once i setup cloudflare redirect rules from http to https if i haven't already */
       var ta=document.createElement('textarea');
       ta.value=raw;ta.style.position='fixed';ta.style.opacity='0';
       document.body.appendChild(ta);ta.select();
@@ -2008,12 +2049,8 @@ window.initParticles();
   });
 })();
 
-/* visitor counter: handled by count.getloli.com badge in HTML */
-
 /* ════════════════════════════════════════════════════════════
    LANYARD STATUS
-   Fetches Discord presence from api.lanyard.rest and shows
-   online/idle/dnd/offline dot + label in the header.
 ════════════════════════════════════════════════════════════ */
 (function(){
   var dot  = document.getElementById('statusDot');
@@ -2038,8 +2075,6 @@ window.initParticles();
 
 /* ════════════════════════════════════════════════════════════
    GITHUB COMMITS
-   Fetches recent commits from the shuuino/shuuino.party repo
-   and displays them in the site updates card with dates.
 ════════════════════════════════════════════════════════════ */
 (function(){
   var loading = document.getElementById('commitLoading');
@@ -2127,6 +2162,8 @@ window.initParticles();
 
 /* ════════════════════════════════════════════════════════════
    MUURI GRID
+   dragging causes some fucked up changes with it recalculating the margin required i forgot why
+   anyways i'll probably have to change this js script into fixing my css to be actually centered on the screen
 ════════════════════════════════════════════════════════════ */
 document.addEventListener('DOMContentLoaded', function(){
 
@@ -2137,36 +2174,46 @@ var grid=new Muuri('#grid',{
   dragStartPredicate:{distance:5,delay:0},
 });
 grid.on('dragStart',function(item){
+  isDragging=true;
   var c=item.getElement().querySelector('.item-content');
   c.style.transform='rotate(1.5deg) scale(1.03)';
   c.style.boxShadow='6px 6px 0 rgba(150,80,255,.4),0 0 30px rgba(160,60,255,.45),0 0 0 2px rgba(200,120,255,.5)';
 });
 grid.on('dragEnd',function(item){
+  isDragging=false;
   var c=item.getElement().querySelector('.item-content');
   c.style.transform='';c.style.boxShadow='';
+  centerGrid();
 });
+
+function centerGrid(){
+  var gridEl=document.getElementById('grid');
+  var sectionEl=gridEl.closest('.grid-section');
+  if(!sectionEl) return;
+    gridEl.style.marginLeft='0px';
+
+  var sectionRect=sectionEl.getBoundingClientRect();
+  var paddingLeft=parseFloat(getComputedStyle(sectionEl).paddingLeft);
+  var paddingRight=parseFloat(getComputedStyle(sectionEl).paddingRight);
+  var sectionInner=sectionRect.width - paddingLeft - paddingRight;
+  var maxRight=0;
+  var gridRect=gridEl.getBoundingClientRect();
+  grid.getItems().forEach(function(item){
+    var r=item.getElement().getBoundingClientRect();
+    maxRight=Math.max(maxRight, r.right - gridRect.left);
+  });
+
+  var offset=Math.max(0, Math.floor((sectionInner - maxRight) / 2));
+  gridEl.style.marginLeft=offset+'px';
+}
+
+var isDragging=false;
 
 /* card entrance on first layout */
 var entranceFired=false;
 grid.on('layoutEnd',function(items){
-  /* center the grid within its section by measuring its actual packed width */
-  var gridEl=document.getElementById('grid');
-  var sectionEl=gridEl.closest('.grid-section');
-  if(sectionEl){
-    var sectionInner=sectionEl.getBoundingClientRect().width
-                     - parseFloat(getComputedStyle(sectionEl).paddingLeft)
-                     - parseFloat(getComputedStyle(sectionEl).paddingRight);
-    /* find rightmost edge of any item */
-    var maxRight=0;
-    var gridRect=gridEl.getBoundingClientRect();
-    grid.getItems().forEach(function(item){
-      var el=item.getElement();
-      var r=el.getBoundingClientRect();
-      maxRight=Math.max(maxRight, r.right - gridRect.left);
-    });
-    var offset=Math.max(0, Math.floor((sectionInner - maxRight) / 2));
-    gridEl.style.marginLeft=offset+'px';
-  }
+  /* only re-center when not mid-drag — avoids position jump while holding a card */
+  if(!isDragging) centerGrid();
 
   if(entranceFired) return;
   entranceFired=true;
@@ -2178,15 +2225,6 @@ grid.on('layoutEnd',function(items){
 });
 
 window.grid=grid;
-
-/* muuri grid checks item widths at DOM breakpoint, doesn't auto-update on its own, so this is required */
-var resizeTimer;
-window.addEventListener('resize', function(){
-  clearTimeout(resizeTimer);
-  resizeTimer = setTimeout(function(){
-    grid.refreshItems().layout();
-  }, 100);
-});
 
 /* re-layout after fonts load to fix FOUT height miscalculations */
 if(document.fonts && document.fonts.ready){
