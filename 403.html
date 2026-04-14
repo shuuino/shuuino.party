@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-   <link rel="icon" type="image/x-icon" href="icon.png">
+  <link rel="icon" type="image/x-icon" href="icon.png">
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>403 · shuuino.party</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -24,21 +24,41 @@
     body{
       background:var(--bg);color:var(--ink);
       font-family:'Space Mono',monospace;
-      display:flex;align-items:center;justify-content:center;min-height:100vh;
+      display:flex;align-items:center;justify-content:center;
+      min-height:100vh;gap:3rem;
       background-image:
         radial-gradient(ellipse 70vw 50vh at 30% 20%,rgba(180,30,220,.15) 0%,transparent 65%),
         radial-gradient(ellipse 50vw 40vh at 75% 75%,rgba(232,121,249,.1) 0%,transparent 60%),
         repeating-linear-gradient(0deg, transparent,transparent 39px,rgba(150,80,255,.03) 39px,rgba(150,80,255,.03) 40px),
         repeating-linear-gradient(90deg,transparent,transparent 39px,rgba(150,80,255,.03) 39px,rgba(150,80,255,.03) 40px);
     }
+
+    /* desktop: image3.gif */
+    .error-gif-wrap{
+      flex-shrink:0;
+      width:280px;
+      display:flex;align-items:center;justify-content:center;
+    }
+    .error-gif-wrap img{
+      width:260px;
+      image-rendering:pixelated;
+      display:block;
+    }
+
     .error-box{
       text-align:center;padding:3rem 2.5rem;max-width:420px;
       background:var(--card-bg);border:1px solid var(--card-bdr);
-      border-radius:10px;box-shadow:0 4px 40px rgba(232,121,249,.15);
+      border-radius:10px;box-shadow:0 4px 40px rgba(232,121,249,.2);
       animation:fadeIn .5s ease forwards;
+      flex-shrink:0;
     }
     @keyframes fadeIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
     @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+    @keyframes shake{
+      0%,100%{transform:translateX(0)}
+      20%{transform:translateX(-4px)}40%{transform:translateX(4px)}
+      60%{transform:translateX(-3px)}80%{transform:translateX(3px)}
+    }
     @keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
     .error-code{
       font-family:'Gochi Hand',cursive;font-size:6rem;line-height:1;
@@ -63,9 +83,29 @@
     .error-footer{margin-top:2rem;font-size:.58rem;color:var(--faint);letter-spacing:.06em}
     .error-footer a{color:var(--faint);text-decoration:none}
     .error-footer a:hover{color:var(--muted)}
+
+    /* mobile: image3_alt.gif */
+    @media(max-width:700px){
+      body{
+        background-image:
+          url('image3_alt.gif'),
+          radial-gradient(ellipse 70vw 50vh at 30% 20%,rgba(180,30,220,.15) 0%,transparent 65%);
+        background-size:cover;
+        background-position:center;
+        background-repeat:no-repeat;
+      }
+      .error-gif-wrap{ display:none; }
+      .error-box{
+        background:rgba(14,1,24,.88);
+        box-shadow:0 4px 40px rgba(232,121,249,.4);
+      }
+    }
   </style>
 </head>
 <body>
+  <div class="error-gif-wrap">
+    <img src="image3.gif" alt="background image" />
+  </div>
   <div class="error-box">
     <span class="error-code">403</span>
     <h1 class="error-title">forbidden<span class="error-cursor"></span></h1>
