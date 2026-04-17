@@ -71,10 +71,6 @@ enjoy the mess that is this code, ig
       0%  {transform:translateY(0)    scale(1);  opacity:1}
       100%{transform:translateY(-38px) scale(.3); opacity:0}
     }
-    @keyframes cardEntrance{
-      from{opacity:0;transform:scale(.94) translateY(8px)}
-      to  {opacity:1;transform:scale(1)   translateY(0)}
-    }
     @keyframes titleSweep{
       0%  {background-position:200% center}
       100%{background-position:-200% center}
@@ -1494,7 +1490,7 @@ enjoy the mess that is this code, ig
 <div class="divider" aria-hidden="true">✦ · · ✦ · · ✦</div>
 
 <!-- CAMPAIGN STRIP -->
-<div class="campaign-strip reveal">
+<div class="campaign-strip">
   <p class="campaign-strip-label">
     <span>◈ stuff worth paying attention to</span>
   </p>
@@ -1571,7 +1567,7 @@ enjoy the mess that is this code, ig
   </div>
   <div class="repost-section-inner">
 
-<article class="repost-post reveal">
+<article class="repost-post">
   <a class="repost-card" href="https://tmctmt.com/posts/http-desync-in-discord/" target="_blank" rel="noopener">
     <span class="repost-card-stripe" style="background:#b06bff"></span>
     <div class="repost-card-body">
@@ -1587,7 +1583,7 @@ enjoy the mess that is this code, ig
   </a>
 </article>
 
-<article class="repost-post reveal">
+<article class="repost-post">
   <a class="repost-card" href="https://linuxiac.com/france-launches-government-linux-desktop-plan-as-windows-exit-begins/" target="_blank" rel="noopener">
     <span class="repost-card-stripe" style="background:#b06bff"></span>
     <div class="repost-card-body">
@@ -1603,7 +1599,7 @@ enjoy the mess that is this code, ig
   </a>
 </article>
 
-<article class="repost-post reveal">
+<article class="repost-post">
   <a class="repost-card" href="https://red.anthropic.com/2026/mythos-preview/" target="_blank" rel="noopener">
     <span class="repost-card-stripe" style="background:#60a5fa"></span>
     <div class="repost-card-body">
@@ -2231,14 +2227,6 @@ var entranceFired=false;
 grid.on('layoutEnd',function(items){
   /* only re-center when not mid-drag — avoids position jump while holding a card */
   if(!isDragging) centerGrid();
-
-  if(entranceFired) return;
-  entranceFired=true;
-  if(document.documentElement.classList.contains('low-perf')) return;
-  items.forEach(function(item,i){
-    var el=item.getElement().querySelector('.item-content');
-    el.style.animation='cardEntrance .4s ease '+(i*60)+'ms both';
-  });
 });
 
 window.grid=grid;
