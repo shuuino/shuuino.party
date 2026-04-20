@@ -10,7 +10,7 @@ enjoy the mess that is this code, ig
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>shuuino.party</title>
-  <link rel="icon" type="image/x-icon" href="icon.png">
+  <link rel="icon" type="image/x-icon" href="files/images/icon.png">
 
   <!-- Polyfill only for browsers that lack Web Animations API (old Safari/Firefox).
        Modern Chrome, Edge, Firefox 75+ don't need it - the document.write trick
@@ -1377,7 +1377,7 @@ enjoy the mess that is this code, ig
       <div class="item-content">
         <!-- card-handle on gif-card-inner = entire card surface is the drag handle -->
         <div class="gif-card-inner card-handle">
-          <img class="gif-img" src="image1.gif" alt="idle gif" draggable="false" />
+          <img class="gif-img" src="files/images/image1.gif" alt="idle gif" draggable="false" />
         </div>
       </div>
     </div>
@@ -1474,7 +1474,7 @@ enjoy the mess that is this code, ig
           <div class="card-handle"><span>◈ my 88×31</span><div class="card-win-btns"><span class="card-win-btn">─</span><span class="card-win-btn">□</span><span class="card-win-btn win-close">×</span></div></div>
           <div class="card-body">
             <div style="display:flex;align-items:center;gap:.6rem;margin-bottom:.3rem;">
-              <a href="#" class="my-btn88" title="shuuino.party"><img src="shuuino-88x31.gif"></a>
+              <a href="#" class="my-btn88" title="shuuino.party"><img src="files/images/shuuino-88x31.gif"></a>
             </div>
             <div class="copy-code-box" id="copyCodeText">
               <strong>embed code</strong>&lt;a href="https://shuuino.party"&gt;&lt;img src="https://shuuino.party/shuuino-88x31.gif" width="88" height="31" alt="shuuino.party" /&gt;&lt;/a&gt;
@@ -1704,7 +1704,7 @@ enjoy the mess that is this code, ig
   <!-- gif used is https://www.instagram.com/p/DWJ6mYxgQkS/ , used with permission from the author-->
   <a href="https://www.instagram.com/redlo.to/" target="_blank" rel="noopener">
   <img class="footer-gif"
-       src="image2.gif"
+       src="files/images/image2.gif"
        alt="idle animation gif"
        loading="lazy" />
 </a>
@@ -2023,7 +2023,7 @@ window.initParticles();
     durEl.textContent=fmt(tracks[idx].dur);
     timeEl.textContent='0:00';
     fill.style.width='0%';
-    audio.src='./songs/'+encodeURIComponent(tracks[idx].title)+'.mp3';
+    audio.src='.files/songs/'+encodeURIComponent(tracks[idx].title)+'.mp3';
     audio.load();
   }
 
