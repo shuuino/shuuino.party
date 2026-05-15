@@ -5,8 +5,16 @@
     <link>https://shuuino.party/repost</link>
     <description>links, articles, and videos i find interesting</description>
     <language>en</language>
-    <lastBuildDate>Fri, 17 Apr 2026 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 15 May 2026 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://shuuino.party/feed.xml" rel="self" type="application/rss+xml"/>
+
+    <item>
+  <title>EU calls VPNs “a loophole that needs closing” in age verification push</title>
+  <link>https://cyberinsider.com/eu-calls-vpns-a-loophole-that-needs-closing-in-age-verification-push/</link>
+  <guid isPermaLink="true">https://cyberinsider.com/eu-calls-vpns-a-loophole-that-needs-closing-in-age-verification-push/</guid>
+  <pubDate>Fri, 15 May 2026 00:00:00 +0000</pubDate>
+  <description>The EU's research service warns that widespread VPN use is undermining online age-verification laws, calling VPNs a legislative loophole that regulators may need to address despite privacy concerns.</description>
+</item>
 
     <item>
       <title>HTTP desync in Discord's media proxy: Spying on a whole platform</title>
